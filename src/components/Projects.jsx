@@ -73,23 +73,6 @@ const Projects = () => {
               </button>
             </div>
           </div>
-
-          {/* Project 4 */}
-          <div className="details-container color-container">
-            <div className="article-container">
-              <img src={project4} alt="Project 4" className="project-img" />
-            </div>
-            <h2 className="experience-sub-title project-title">Milkera ERP</h2>
-            <div className="btn-container">
-              <button
-                className="btn btn-color-2 project-btn"
-                onClick={openMilkeraPage} // Redirect to Milkera page
-              >
-                View Detail
-              </button>
-            </div>
-          </div>
-
         </div>
       </div>
       <img

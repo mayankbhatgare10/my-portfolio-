@@ -1,3 +1,4 @@
+/* App.css */
 .App {
   text-align: center;
 }
@@ -36,3 +37,44 @@
     transform: rotate(360deg);
   }
 }
+
+/* Custom Cursor Styles */
+body {
+  cursor: none; /* Hide the default cursor */
+}
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, background-color 0.3s ease;
+}
+
+.custom-cursor.hovering {
+  transform: scale(1.5);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Custom cursor styles for different elements */
+.custom-cursor.default {
+  border-color: black;
+}
+
+.custom-cursor.pointer {
+  border-color: blue;
+}
+
+.custom-cursor.text {
+  border-color: green;
+}
+
+.custom-cursor.resize {
+  border-color: red;
+}
+
+/* Additional custom cursors for other types */

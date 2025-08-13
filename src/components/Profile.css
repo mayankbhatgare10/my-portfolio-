@@ -16,6 +16,12 @@ html {
 
 p {
   color: rgb(85, 85, 85);
+  transition: color 0.3s ease;
+}
+
+/* DARK MODE STYLES */
+body.dark-mode p {
+  color: #cccccc;
 }
 
 /* TRANSITION */
@@ -29,7 +35,9 @@ a,
   display: flex;
   justify-content: center;
   gap: 5rem;
-  height: 80vh;
+  height: 100vh;
+  padding: 1rem;
+  margin-bottom: 0;
 }
 
 .section__pic-container {
@@ -37,6 +45,11 @@ a,
   height: 400px;
   width: 400px;
   margin: auto 0;
+  transition: box-shadow 0.4s ease, filter 0.4s ease;
+}
+
+.section__pic-container img {
+  transition: box-shadow 0.4s ease, filter 0.4s ease;
 }
 
 .section__text {
@@ -54,36 +67,17 @@ a,
 
 .section__text__p2 {
   font-size: 1.75rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-bottom: 1rem;
 }
 
-/* Typing Animation for Title */
+/* Title styling for Magic UI */
 .title {
   font-size: 3rem;
   text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 0.15em solid rgb(53, 53, 53);
-  animation: typing 4s steps(40, end), blink-caret 1s step-end infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink-caret {
-  from, to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: rgb(53, 53, 53);
-  }
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 700;
 }
 
 #socials-container {
@@ -97,6 +91,12 @@ a,
 .icon {
   cursor: pointer;
   height: 2rem;
+  transition: filter 0.4s ease;
+}
+
+/* DARK MODE ICON STYLES */
+body.dark-mode .icon {
+  filter: invert(1) brightness(1.2);
 }
 
 /* BUTTONS */
@@ -140,4 +140,178 @@ a,
 
 .btn-color-2:hover {
   border: rgb(255, 255, 255) 0.1rem solid;
+}
+
+/* DARK MODE BUTTON STYLES */
+body.dark-mode .btn-color-1,
+body.dark-mode .btn-color-2 {
+  border: rgb(200, 200, 200) 0.1rem solid;
+}
+
+body.dark-mode .btn-color-1,
+body.dark-mode .btn-color-2:hover {
+  background: rgb(200, 200, 200);
+  color: #0a0a0a;
+}
+
+body.dark-mode .btn-color-1:hover {
+  background: rgb(255, 255, 255);
+  color: #0a0a0a;
+}
+
+body.dark-mode .btn-color-2 {
+  background: none;
+  color: #ffffff;
+}
+
+body.dark-mode .btn-color-2:hover {
+  border: rgb(200, 200, 200) 0.1rem solid;
+}
+
+/* DARK MODE PROFILE IMAGE - REMOVE SHADOWS */
+body.dark-mode .section__pic-container,
+body.dark-mode .section__pic-container img {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  #profile {
+    gap: 3rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .section__pic-container {
+    width: 350px;
+    height: 350px;
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .section__text__p2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #profile {
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 100vh;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .section__pic-container {
+    width: 300px;
+    height: 300px;
+    order: 1;
+    margin: 0 auto;
+  }
+
+  .section__text {
+    order: 2;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    white-space: normal;
+    overflow: visible;
+    border-right: none;
+    animation: none;
+  }
+
+  .section__text__p2 {
+    font-size: 1.5rem;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  #socials-container {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #profile {
+    padding: 1.5rem 0.5rem;
+    gap: 1.5rem;
+  }
+
+  .section__pic-container {
+    width: 250px;
+    height: 250px;
+  }
+
+  .title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .section__text__p2 {
+    font-size: 1.3rem;
+  }
+
+  .section__text__p1 {
+    font-size: 0.9rem;
+  }
+
+  .btn-container {
+    gap: 0.8rem;
+  }
+
+  .btn {
+    max-width: 200px;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  #socials-container {
+    gap: 1rem;
+  }
+
+  .icon {
+    height: 1.8rem;
+  }
+}
+
+@media (max-width: 320px) {
+  #profile {
+    padding: 1rem 0.3rem;
+  }
+
+  .section__pic-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .section__text__p2 {
+    font-size: 1.1rem;
+  }
+
+  .btn {
+    max-width: 180px;
+    padding: 0.7rem;
+    font-size: 0.8rem;
+  }
 }

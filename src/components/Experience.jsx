@@ -1,94 +1,67 @@
-import React from 'react';
-import './Experience.css';
-import checkmarkIcon from '../assets/checkmark.png';
-import arrowIcon from '../assets/arrow.png';
+import React from "react";
+import "./Experience.css";
+import arrowIcon from "../assets/arrow.png";
+import TypingAnimation from "./ui/typing-animation";
 
 const Experience = () => {
+  const designSkills = [
+    "UX/UI Design",
+    "Product Design",
+    "User Research",
+    "Wireframing & Prototyping",
+    "User Flows & Journey Mapping",
+    "Design Systems",
+    "Responsive Design",
+    "Accessibility (WCAG)",
+    "Usability Testing",
+    "Human-Centered Design",
+    "Agile/Scrum Collaboration",
+    "Rapid Prototyping",
+    "Branding & Typography",
+    "Color Theory",
+  ];
+
+  const technicalSkills = [
+    "HTML5 & CSS3",
+    "TypeScript",
+    "JavaScript (ES6+)",
+    "Python",
+    "Next.js",
+    "React.js",
+    "Git & GitHub",
+    "VS Code",
+    "Figma",
+    "Motiff",
+    "Affinity Serif Suite",
+    "QA Testing",
+    "Version Control",
+  ];
+
   return (
     <section id="experience">
       <p className="section__text__p1">Explore My</p>
-      <h1 className="title"> Stacks </h1>
+      <TypingAnimation text="Skills" duration={100} className="title" />
       <div className="experience-details-container">
-        <div className="about-containers">
-          <div className="details-container">
-            <h2 className="experience-sub-title">Frontend Development</h2>
-            <div className="article-container">
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>HTML/CSS</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>React.js</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>JavaScript</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>Ant-Design</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>Material UI</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
+        <div className="skills-grid">
+          <div className="skills-category">
+            <h2 className="category-title">Design</h2>
+            <div className="skills-list">
+              {designSkills.map((skill, index) => (
+                <span key={index} className="skill-tag">
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
-          <div className="details-container">
-            <h2 className="experience-sub-title">Graphic Designing & UI / UX </h2>
-            <div className="article-container">
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>Figma</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>Affinity Suit</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>Axure RP</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>Proto.io</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <img src={checkmarkIcon} alt="Experience icon" className="icon" />
-                <div>
-                  <h3>Canva</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
+
+          <div className="skills-category">
+            <h2 className="category-title">Technical</h2>
+            <div className="skills-list">
+              {technicalSkills.map((skill, index) => (
+                <span key={index} className="skill-tag">
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -97,7 +70,7 @@ const Experience = () => {
         src={arrowIcon}
         alt="Arrow icon"
         className="icon arrow"
-        onClick={() => window.location.href = './#projects'}
+        onClick={() => (window.location.href = "#achievements")}
       />
     </section>
   );

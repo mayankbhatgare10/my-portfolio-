@@ -1,13 +1,172 @@
+html {
+  background-color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+/* IMMEDIATE DARK MODE OVERRIDE */
+html.dark-mode {
+  background: #0a0a0a !important;
+  background-color: #0a0a0a !important;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  background-color: #ffffff;
+  color: #000000;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* FORCE BLACK DARK MODE */
+html.dark-mode,
+html.dark-mode *,
+body.dark-mode,
+body.dark-mode *,
+.dark-mode,
+.dark-mode * {
+  background: #0a0a0a !important;
+  background-color: #0a0a0a !important;
+}
+
+body.dark-mode {
+  color: #ffffff !important;
+}
+
+body.dark-mode section,
+body.dark-mode div,
+body.dark-mode main,
+body.dark-mode article {
+  background: #0a0a0a !important;
+  background-color: #0a0a0a !important;
+}
+
+body.dark-mode #root {
+  background: #0a0a0a !important;
+  background-color: #0a0a0a !important;
+}
+
+/* SMOOTH TEXT TRANSITIONS FOR DARK MODE */
+body.dark-mode .title,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #ffffff !important;
+  transition: color 0.4s ease !important;
+}
+
+body.dark-mode .section__text__p1,
+body.dark-mode .section__text__p2,
+body.dark-mode p,
+body.dark-mode span {
+  color: #e5e5e5 !important;
+  transition: color 0.4s ease !important;
+}
+
+/* Ensure all text elements have smooth transitions */
+.title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  transition: color 0.4s ease;
+}
+
+.section__text__p1,
+.section__text__p2,
+p,
+span {
+  transition: color 0.4s ease;
+}
+
+/* Force specific overrides */
+body.dark-mode .skills-category,
+body.dark-mode .project-card,
+body.dark-mode .education-item,
+body.dark-mode .achievement-card,
+body.dark-mode .contact-info-upper-container {
+  background: rgba(30, 30, 30, 0.8) !important;
+}
+
+* {
+  box-sizing: border-box; /* Better responsive behavior */
+}
+
+/* Improved responsive spacing */
+section {
+  scroll-margin-top: 80px;
+  padding: 0.5rem 1rem;
+  margin-bottom: -2rem;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.section__text__p1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Global responsive adjustments */
+@media screen and (max-width: 768px) {
+  section {
+    padding: 0.5rem 0.5rem;
+    margin-bottom: -1.5rem;
+  }
+
+  .title {
+    font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+    margin-bottom: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  section {
+    padding: 0.3rem 0.3rem;
+    margin-bottom: -1rem;
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* NUCLEAR DARK MODE - FORCE EVERYTHING BLACK */
+.dark-mode,
+.dark-mode *,
+.dark-mode *:before,
+.dark-mode *:after {
+  background: #0a0a0a !important;
+  background-color: #0a0a0a !important;
+}
+
+/* Keep specific components with their dark styling */
+.dark-mode .skills-category,
+.dark-mode .project-card,
+.dark-mode .education-item,
+.dark-mode .achievement-card,
+.dark-mode .contact-info-upper-container,
+.dark-mode .dock-container {
+  background: rgba(30, 30, 30, 0.8) !important;
+  background-color: rgba(30, 30, 30, 0.8) !important;
 }

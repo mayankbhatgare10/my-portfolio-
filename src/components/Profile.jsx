@@ -1,42 +1,74 @@
-import React from 'react';
-import './Profile.css';
-import profilePic from '../assets/Professional LinkedIn Profile Picture.png';
-import linkedinIcon from '../assets/linkedin.png';
-import githubIcon from '../assets/github.png';
+import React from "react";
+import "./Profile.css";
+import profilePic from "../assets/Professional LinkedIn Profile Picture.png";
+import profilePicDark from "../assets/Professional LinkedIn Profile Picture_Dark.png";
+import linkedinIcon from "../assets/linkedin.png";
+import githubIcon from "../assets/github.png";
+import TypingAnimation from "./ui/typing-animation";
+import InteractiveHoverButton from "./ui/interactive-hover-button";
+import { useDarkMode } from "../contexts/DarkModeContext";
 
 const Profile = () => {
+  const { isDarkMode } = useDarkMode();
+
   return (
     <section id="profile">
       <div className="section__pic-container">
-        <img src={profilePic} alt="Mayank Bhatgare profile picture" />
+        <img
+          src={isDarkMode ? profilePicDark : profilePic}
+          alt="Mayank Bhatgare"
+          style={{
+            transition: "opacity 0.4s ease",
+            opacity: 1,
+          }}
+        />
       </div>
       <div className="section__text">
         <p className="section__text__p1">Hello, I'm</p>
-        <h1 className="title">Mayank Nitin Bhatgare</h1>
-        <p className="section__text__p2">A Versatile Graphic Designer &<br />Frontend Developer</p>
+        <TypingAnimation
+          text="Mayank Nitin Bhatgare"
+          duration={150}
+          className="title"
+        />
+        <p className="section__text__p2">
+          A Product Designer &<br />
+          Frontend Developer
+        </p>
         <div className="btn-container">
-          <button
-            className="btn btn-color-2"
-            onClick={() => window.open('https://drive.google.com/file/d/1kGL6L9DEdjgT0GdUas85FAy76BQT0tI1/view?usp=sharing')}
-          >
-            Resume
-          </button>
-          <button className="btn btn-color-1" onClick={() => window.location.href = './#contact'}>
-            Contact Info
-          </button>
+          <InteractiveHoverButton
+            text="Resume"
+            variant="secondary"
+            onClick={() =>
+              window.open(
+                "https://drive.google.com/file/d/19IeNUHip04OoaMaHfPyPUYTWaodY90-5/view?usp=sharing"
+              )
+            }
+          />
+          <InteractiveHoverButton
+            text="Contact Info"
+            variant="primary"
+            onClick={() => {
+              document.getElementById("contact").scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+          />
         </div>
         <div id="socials-container">
           <img
             src={linkedinIcon}
             alt="My LinkedIn profile"
             className="icon"
-            onClick={() => window.location.href = 'https://www.linkedin.com/in/mayank-bhatgare'}
+            onClick={() =>
+              (window.location.href =
+                "https://www.linkedin.com/in/mayank-bhatgare")
+            }
           />
           <img
             src={githubIcon}
             alt="My Github profile"
             className="icon"
-            onClick={() => window.location.href = 'https://github.com/'}
+            onClick={() => (window.location.href = "https://github.com/")}
           />
         </div>
       </div>

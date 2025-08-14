@@ -104,8 +104,8 @@ export default function Dock() {
       const sections = [
         "profile",
         "about",
-        "experience",
         "projects",
+        "experience",
         "education",
         "achievements",
         "contact",
@@ -202,6 +202,26 @@ export default function Dock() {
       ),
     },
     {
+      id: "projects",
+      href: "#projects",
+      section: "projects",
+      tooltip: "Projects",
+      icon: (
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+        </svg>
+      ),
+    },
+    {
       id: "skills",
       href: "#experience",
       section: "experience",
@@ -219,26 +239,6 @@ export default function Dock() {
         >
           <circle cx="12" cy="12" r="3" />
           <path d="m12 1 0 6m0 6 0 6m11-7-6 0m-6 0-6 0" />
-        </svg>
-      ),
-    },
-    {
-      id: "projects",
-      href: "#projects",
-      section: "projects",
-      tooltip: "Projects",
-      icon: (
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
         </svg>
       ),
     },

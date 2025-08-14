@@ -68,10 +68,10 @@ const AppContent = () => {
                 <About />
               </AnimatedComponent>
               <AnimatedComponent>
-                <Experience />
+                <Projects />
               </AnimatedComponent>
               <AnimatedComponent>
-                <Projects />
+                <Experience />
               </AnimatedComponent>
               <AnimatedComponent>
                 <Education />

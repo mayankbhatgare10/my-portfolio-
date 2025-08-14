@@ -4,6 +4,8 @@ import TypingAnimation from "./ui/typing-animation";
 import payTrakzImg from "../assets/PayTrakz.jpg";
 import dairyAppImg from "../assets/Dairy App.png";
 import infobytesImg from "../assets/Infobytes Technosys.png";
+import digiMuscleImg from "../assets/DigiMuscle.png";
+import vendorOnboardingImg from "../assets/Vendor Onboarding.jpg";
 import hiFiImg from "../assets/Hi-Fi.png";
 import wanderWiseImg from "../assets/WanderWise.png";
 import allGraphicsImg from "../assets/all graphics.png";
@@ -53,6 +55,30 @@ const Projects = () => {
     },
     {
       id: 4,
+      title: "DigiMuscle App",
+      description:
+        "Health-tech app for clinicians to measure muscle strength and track rehabilitation progress",
+      role: "Product Designer",
+      contribution:
+        "Designed user-friendly workflows for patient management, progress tracking, and report generation. Created clear data visualizations and streamlined testing flows to ensure an intuitive experience for clinicians across different specializations.",
+      tools: "Figma, Interaction Design, Data Visualization",
+      image: digiMuscleImg,
+      link: "https://www.figma.com/design/fuWsFOI5t3LR4a0d6CHcbV/DigiMuscle?node-id=0-1&t=QcEaJMYc881cfuIZ-1",
+    },
+    {
+      id: 5,
+      title: "Vendor Onboarding Platform",
+      description:
+        "Role-based system to streamline vendor onboarding and compliance processes",
+      role: "Product Designer",
+      contribution:
+        "Defined platform workflows, mapped role-based journeys, and structured form designs to reduce onboarding complexity. Applied accessibility principles, optimized navigation patterns, and ensured a scalable design framework for future expansion.",
+      tools: "Figma, Information Architecture, Process Mapping",
+      image: vendorOnboardingImg,
+      link: "https://www.figma.com/design/FJiwlg8xWTeSjUDn5cbv9L/Vendor-Onboarding?node-id=0-1&t=DI8kwhPKGMZRtIHw-1",
+    },
+    {
+      id: 6,
       title: "Hi-Fi",
       description:
         "AI-powered financial assistant that helps users understand, manage, and act on their finances — like ChatGPT for your bank account",
@@ -64,7 +90,7 @@ const Projects = () => {
       link: "https://web.hifi.click/login",
     },
     {
-      id: 5,
+      id: 7,
       title: "WanderWise",
       description: "Solo travel buddy platform for planning and managing trips",
       role: "UI/UX Designer",
@@ -75,7 +101,7 @@ const Projects = () => {
       link: "https://www.figma.com/design/HZReHgHUfRTu7d23fKXzSn/Untitled?node-id=0-1&t=t4ltd82WzE0acPBu-1",
     },
     {
-      id: 6,
+      id: 8,
       title: "All Graphic",
       description: "Graphic design projects and visual content",
       role: "Graphic Designer",
@@ -86,7 +112,7 @@ const Projects = () => {
       link: "https://www.canva.com/design/DAGEhrvsbKM/WHeqggomjjTEEhCextk9bw/edit?utm_content=DAGEhrvsbKM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
     },
     {
-      id: 7,
+      id: 9,
       title: "Jalank UI",
       description: "User interface design for Jalank platform",
       role: "UI Designer",
@@ -97,7 +123,7 @@ const Projects = () => {
       link: "https://www.figma.com/file/0dumo3b7gmQ2y3RxJNYcrP/JalAnk-UI?type=design&node-id=0%3A1&mode=design&t=a9PZiQm38FpZGUIo-1",
     },
     {
-      id: 8,
+      id: 10,
       title: "NextGen Grocery",
       description: "Modern grocery shopping platform interface",
       role: "UI/UX Designer",
@@ -178,7 +204,7 @@ const Projects = () => {
         src={arrowIcon}
         alt="Arrow icon"
         className="icon arrow"
-        onClick={() => (window.location.href = "#contact")}
+        onClick={() => (window.location.href = "#experience")}
       />
     </section>
   );

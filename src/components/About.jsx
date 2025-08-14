@@ -40,7 +40,7 @@ const About = () => {
         src={arrowIcon}
         alt="Arrow icon"
         className="icon arrow"
-        onClick={() => (window.location.href = "#education")}
+        onClick={() => (window.location.href = "#projects")}
       />
     </section>
   );

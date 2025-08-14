@@ -15,18 +15,19 @@ const About = () => {
           <div className="about-details-container">
             <div className="text-container">
               <p>
-                I'm a Product Designer specializing in UX research, UI design,
-                and frontend development, passionate about turning complex ideas
-                into intuitive, visually engaging digital experiences. With
-                hands-on expertise in tools like Figma, Next.js, and React.js,
-                I've delivered impactful solutions across fintech, travel, and
-                enterprise platforms. From user flows and prototypes to
-                polished, production-ready interfaces, I handle the complete
-                design journey while keeping users at the heart of every
-                decision. Recognized in national and international hackathons, I
-                combine human-centered design principles with technical
-                execution to create products that are not only beautiful but
-                also highly functional and accessible.
+                I’m a Product Designer passionate about transforming complex
+                ideas into simple, elegant user experiences. As Lead UI/UX
+                Designer at Infobytes Technosys, I’ve shaped both client
+                solutions and in-house products—most notably PayTrakz, an
+                advanced expense tracking platform—through end-to-end design
+                ownership, from UX research and strategy to high-fidelity UI and
+                interaction design. My approach blends human-centered design
+                principles with strong technical execution, leveraging tools
+                like Figma, Affinity Suite, and Git alongside development skills
+                in Next.js, React.js, HTML, CSS, and TypeScript. Recognized at
+                national-level hackathons for innovation and design excellence,
+                I excel at creating digital products that are not only visually
+                striking but also functional, accessible, and business-driven.
               </p>
             </div>
           </div>

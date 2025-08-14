@@ -40,7 +40,7 @@ const Profile = () => {
             variant="secondary"
             onClick={() =>
               window.open(
-                "https://drive.google.com/file/d/19IeNUHip04OoaMaHfPyPUYTWaodY90-5/view?usp=sharing"
+                "https://drive.google.com/file/d/1zDvCIqIRDgi7DqTu6t8vK0K9pjnQhIOa/view?usp=sharing"
               )
             }
           />

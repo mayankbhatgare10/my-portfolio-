@@ -68,7 +68,7 @@ const Profile = () => {
             src={githubIcon}
             alt="My Github profile"
             className="icon"
-            onClick={() => (window.location.href = "https://github.com/")}
+            onClick={() => (window.location.href = "https://github.com/mayankbhatgare10")}
           />
         </div>
       </div>

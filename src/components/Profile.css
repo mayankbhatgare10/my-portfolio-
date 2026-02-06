@@ -1,13 +1,13 @@
 /* GENERAL */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: sans-serif; /* Removed custom font import */
+  font-family: 'Hind Madurai', sans-serif;
 }
 
 html {
@@ -30,288 +30,433 @@ a,
   transition: all 300ms ease;
 }
 
-/* PROFILE SECTION */
+/* PROFILE SECTION - CENTERED LAYOUT */
 #profile {
+  position: relative;
   display: flex;
   justify-content: center;
-  gap: 5rem;
+  align-items: center;
   height: 100vh;
-  padding: 1rem;
+  padding: 2rem;
   margin-bottom: 0;
+  overflow: hidden;
 }
 
-.section__pic-container {
+.profile-content-centered {
   display: flex;
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
-  transition: box-shadow 0.4s ease, filter 0.4s ease;
-}
-
-.section__pic-container img {
-  transition: box-shadow 0.4s ease, filter 0.4s ease;
-}
-
-.section__text {
-  align-self: center;
-  text-align: center;
-}
-
-.section__text p {
-  font-weight: 600;
-}
-
-.section__text__p1 {
-  text-align: center;
-}
-
-.section__text__p2 {
-  font-size: 1.75rem;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin-bottom: 1rem;
-}
-
-/* Title styling for Magic UI */
-.title {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #333;
-  font-weight: 700;
-}
-
-#socials-container {
-  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  margin-top: 1rem;
-  gap: 1rem;
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  gap: 1.5rem;
 }
 
-/* ICONS */
-.icon {
-  cursor: pointer;
-  height: 2rem;
-  transition: filter 0.4s ease;
+/* AVAILABILITY BADGE */
+.profile-availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  transition: all 0.3s ease;
 }
 
-/* DARK MODE ICON STYLES */
-body.dark-mode .icon {
-  filter: invert(1) brightness(1.2);
-}
-
-/* BUTTONS */
-.btn-container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.btn {
-  font-weight: 600;
-  transition: all 300ms ease;
-  padding: 1rem;
-  width: 8rem;
-  border-radius: 2rem;
-}
-
-.btn-color-1,
-.btn-color-2 {
-  border: rgb(53, 53, 53) 0.1rem solid;
-}
-
-.btn-color-1:hover,
-.btn-color-2:hover {
-  cursor: pointer;
-}
-
-.btn-color-1,
-.btn-color-2:hover {
-  background: rgb(53, 53, 53);
-  color: white;
-}
-
-.btn-color-1:hover {
-  background: rgb(0, 0, 0);
-}
-
-.btn-color-2 {
-  background: none;
-}
-
-.btn-color-2:hover {
-  border: rgb(255, 255, 255) 0.1rem solid;
-}
-
-/* DARK MODE BUTTON STYLES */
-body.dark-mode .btn-color-1,
-body.dark-mode .btn-color-2 {
-  border: rgb(200, 200, 200) 0.1rem solid;
-}
-
-body.dark-mode .btn-color-1,
-body.dark-mode .btn-color-2:hover {
-  background: rgb(200, 200, 200);
-  color: #0a0a0a;
-}
-
-body.dark-mode .btn-color-1:hover {
-  background: rgb(255, 255, 255);
-  color: #0a0a0a;
-}
-
-body.dark-mode .btn-color-2 {
-  background: none;
+body.dark-mode .profile-availability-badge {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
 
-body.dark-mode .btn-color-2:hover {
-  border: rgb(200, 200, 200) 0.1rem solid;
+.profile-status-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
 }
 
-/* DARK MODE PROFILE IMAGE - REMOVE SHADOWS */
-body.dark-mode .section__pic-container,
-body.dark-mode .section__pic-container img {
-  box-shadow: none !important;
-  filter: none !important;
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.profile-status-text {
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
+/* MAIN HEADING */
+.profile-heading-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  filter: blur(10px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-heading-wrapper.loaded {
+  filter: blur(0);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.main-heading-part,
+.profile-main-heading-part {
+  font-size: 4rem;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  color: #000000;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+body.dark-mode .profile-main-heading-part {
+  color: #ffffff;
+}
+
+.profile-name-highlight {
+  position: relative;
+  display: inline;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800 !important;
+  font-size: inherit;
+  color: #2563eb !important;
+  letter-spacing: -0.01em;
+}
+
+
+
+
+
+
+
+/* DESCRIPTION */
+.profile-description {
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  color: #666;
+  max-width: 700px;
+  line-height: 1.6;
+  filter: blur(10px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+.profile-description.loaded {
+  filter: blur(0);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.dark-mode .profile-description {
+  color: #aaa;
+}
+
+/* HIGHLIGHTER EFFECT */
+.profile-highlight {
+  position: relative;
+  display: inline;
+  background: linear-gradient(180deg, transparent 60%, #ffd93d 60%);
+  padding: 0 0.2rem;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .profile-highlight {
+  background: linear-gradient(180deg, transparent 60%, #ffeb3b 60%);
+  color: #1a1a1a;
+}
+
+/* SOCIAL ICONS ROW */
+.profile-social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 8px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.profile-social-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+.profile-social-link:hover {
+  color: #000;
+  transform: translateY(-3px) scale(1.1);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .profile-social-link {
+  color: #aaa;
+}
+
+body.dark-mode .profile-social-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* CONNECT BUTTON */
+.profile-connect-button {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.5rem;
+  background: #2d2d2d;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: 'Hind Madurai', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.connect-button:hover {
+  background: #1a1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.profile-connect-button:active {
+  transform: translateY(0);
+}
+
+.profile-arrow-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-arrow-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+body.dark-mode .profile-connect-button {
+  background: #f5f5f5;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .profile-connect-button:hover {
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* TIME AND DATE DISPLAYS */
+.time-display,
+.date-display {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: 'Hind Madurai', sans-serif;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.time-display {
+  right: 2rem;
+}
+
+.date-display {
+  left: 2rem;
+}
+
+body.dark-mode .time-display,
+body.dark-mode .date-display {
+  color: #ddd;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.time-display:hover,
+.date-display:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .time-display:hover,
+body.dark-mode .date-display:hover {
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  #profile {
-    gap: 3rem;
-    padding: 1.5rem 1rem;
+  .profile-main-heading-part {
+    font-size: 3.5rem;
   }
 
-  .section__pic-container {
-    width: 350px;
-    height: 350px;
+  .profile-description {
+    font-size: 1.3rem;
   }
 
-  .title {
-    font-size: 2.8rem;
-  }
-
-  .section__text__p2 {
-    font-size: 1.6rem;
+  .time-display,
+  .date-display {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
   }
 }
 
 @media (max-width: 768px) {
   #profile {
-    flex-direction: column;
-    gap: 2rem;
-    min-height: 100vh;
-    height: auto;
-    padding: 2rem 1rem;
+    padding: 1.5rem;
   }
 
-  .section__pic-container {
-    width: 300px;
-    height: 300px;
-    order: 1;
-    margin: 0 auto;
+  .profile-content-centered {
+    gap: 1.2rem;
   }
 
-  .section__text {
-    order: 2;
-    max-width: 100%;
-    width: 100%;
+  .profile-main-heading-part {
+    font-size: 2.8rem;
   }
 
-  .title {
-    font-size: 2.5rem;
-    white-space: normal;
-    overflow: visible;
-    border-right: none;
-    animation: none;
+  .profile-description {
+    font-size: 1.2rem;
   }
 
-  .section__text__p2 {
-    font-size: 1.5rem;
+  .profile-availability-badge {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
   }
 
-  .btn-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
+  .profile-status-dot {
+    width: 7px;
+    height: 7px;
   }
 
-  .btn {
-    width: 100%;
-    max-width: 250px;
+  .time-display,
+  .date-display {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+    bottom: 1.5rem;
   }
 
-  #socials-container {
-    justify-content: center;
-    gap: 1.5rem;
+  .time-display {
+    right: 1rem;
   }
+
+  .date-display {
+    left: 1rem;
+  }
+
 }
 
 @media (max-width: 480px) {
   #profile {
-    padding: 1.5rem 0.5rem;
-    gap: 1.5rem;
+    padding: 1rem;
   }
 
-  .section__pic-container {
-    width: 250px;
-    height: 250px;
+  .profile-main-heading-part {
+    font-size: 2.2rem;
   }
 
-  .title {
-    font-size: 2rem;
-    line-height: 1.2;
+  .profile-description {
+    font-size: 1.1rem;
+    padding: 0 1rem;
   }
 
-  .section__text__p2 {
-    font-size: 1.3rem;
+  .profile-availability-badge {
+    font-size: 0.8rem;
+    padding: 0.45rem 0.9rem;
   }
 
-  .section__text__p1 {
-    font-size: 0.9rem;
+  .profile-status-dot {
+    width: 6px;
+    height: 6px;
   }
 
-  .btn-container {
-    gap: 0.8rem;
+  .time-display,
+  .date-display {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.8rem;
+    bottom: 1rem;
   }
 
-  .btn {
-    max-width: 200px;
-    padding: 0.8rem;
-    font-size: 0.9rem;
+  .time-display {
+    right: 0.5rem;
   }
 
-  #socials-container {
-    gap: 1rem;
+  .date-display {
+    left: 0.5rem;
   }
 
-  .icon {
-    height: 1.8rem;
-  }
 }
 
-@media (max-width: 320px) {
-  #profile {
-    padding: 1rem 0.3rem;
-  }
-
-  .section__pic-container {
-    width: 200px;
-    height: 200px;
-  }
-
-  .title {
+@media (max-width: 380px) {
+  .profile-main-heading-part {
     font-size: 1.8rem;
   }
 
-  .section__text__p2 {
-    font-size: 1.1rem;
+  .profile-description {
+    font-size: 1rem;
   }
 
-  .btn {
-    max-width: 180px;
-    padding: 0.7rem;
-    font-size: 0.8rem;
+  .time-display,
+  .date-display {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.7rem;
+  }
+
+  .profile-availability-badge {
+    font-size: 0.75rem;
   }
 }

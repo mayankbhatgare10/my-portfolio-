@@ -1,0 +1,74 @@
+/* EMERGENCY OVERFLOW FIX - Targeted Solution */
+
+/* Force proper box-sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Prevent horizontal scroll at root level */
+html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+body {
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Ensure all major containers respect boundaries */
+section {
+    max-width: 100%;
+    overflow-x: clip;
+    /* Modern alternative to hidden that doesn't affect positioning */
+}
+
+/* Specific fix for elements using 100vw */
+.tape-strip {
+    width: calc(100% + 4rem) !important;
+    /* Slightly wider to account for rotation */
+    max-width: none !important;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+}
+
+/* Ensure fixed position elements don't cause overflow */
+[style*="position: fixed"],
+[style*="position:fixed"] {
+    left: 0;
+    right: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Specific fixes for known problem areas */
+.products-section,
+.about-section,
+.achievements-scroll-wrapper,
+.footer-section {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+/* Ensure the tech ticker doesn't overflow */
+.tech-ticker-container {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Ensure particles container doesn't cause scroll */
+div[style*="position: fixed"][style*="width: 100vw"] {
+    width: 100% !important;
+}

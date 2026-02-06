@@ -1,0 +1,616 @@
+.products-section {
+    padding: 0 5% 6rem 5%;
+    /* NO top padding to eliminate gap */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+    /* Large gap between projects */
+    width: 100%;
+}
+
+/* SECTION HEADER */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.section-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.dark-mode .section-subtitle {
+    color: #aaa;
+}
+
+.dark-mode .section-title {
+    color: #fff;
+}
+
+/* PROJECT ITEM (The Card) */
+.product-item {
+    display: flex;
+    align-items: center;
+    /* Center Vertically */
+    justify-content: space-between;
+    width: 100%;
+    gap: 6rem;
+    /* Clean, wide gap */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* LAST ITEM NO BORDER */
+.product-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.product-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* REVERSE LAYOUT (Alternating) */
+.product-item.reverse {
+    flex-direction: row-reverse;
+}
+
+/* TEXT SIDE */
+.product-info {
+    flex: 0.45;
+    /* 45% Width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    /* Better vertical breathing room */
+}
+
+.product-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.product-brand strong {
+    font-weight: 700;
+    display: block;
+}
+
+.dark-mode .product-brand {
+    color: #fff;
+}
+
+/* Role Badge */
+.product-role-badge {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #fff;
+    background: #000;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    align-self: flex-start;
+}
+
+.dark-mode .product-role-badge {
+    background: #fff;
+    color: #000;
+}
+
+.product-description {
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    font-weight: 400;
+    max-width: 95%;
+    margin: 0;
+}
+
+.dark-mode .product-description {
+    color: #ccc;
+}
+
+/* INLINE READ MORE BUTTON */
+.product-read-more-inline {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 8px;
+    display: inline;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s;
+}
+
+.product-read-more-inline:hover {
+    opacity: 0.6;
+}
+
+.dark-mode .product-read-more-inline {
+    color: #fff;
+}
+
+/* Collapsible Section */
+.product-collapsible {
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.product-details-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-details-list li {
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 0.6rem;
+    position: relative;
+    padding-left: 1.2rem;
+    line-height: 1.5;
+}
+
+.product-details-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #000;
+    font-weight: bold;
+}
+
+.dark-mode .product-details-list li {
+    color: #bbb;
+}
+
+.dark-mode .product-details-list li::before {
+    color: #fff;
+}
+
+/* Tech Tags Section */
+.product-tech-container {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.tech-stack-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.tech-tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.tech-tag-minimal {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px;
+    /* Full pill shape for tech tags too */
+    color: #666;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tech-tag-minimal:hover {
+    border-color: #bbb;
+    color: #333;
+}
+
+.dark-mode .tech-tag-minimal {
+    border-color: #444;
+    color: #aaa;
+}
+
+.dark-mode .tech-tag-minimal:hover {
+    color: #fff;
+    border-color: #666;
+}
+
+.toast-icon {
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Toast Responsive */
+@media screen and (max-width: 768px) {
+    .minimal-toast {
+        bottom: 90px !important;
+        font-size: 0.8rem;
+        padding: 0.6rem 1.2rem;
+        max-width: 85vw;
+    }
+
+    .toast-icon {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .minimal-toast {
+        bottom: 80px !important;
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+        max-width: 90vw;
+    }
+
+    .toast-icon {
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .minimal-toast {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.8rem;
+        max-width: 92vw;
+    }
+
+    .toast-icon {
+        font-size: 0.8rem;
+    }
+}
+
+/* BUTTONS */
+.product-actions {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* PILL BUTTON with Arrow Animation */
+.btn-pill {
+    background: #000;
+    color: #fff;
+    height: 54px;
+    padding: 0 2.2rem;
+    border-radius: 27px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    min-width: 170px;
+}
+
+.btn-pill .arrow-icon {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-pill:hover .arrow-icon {
+    transform: rotate(-45deg);
+    /* Points North-East */
+}
+
+.btn-pill:hover {
+    transform: scale(1.03);
+    background: #222;
+}
+
+.dark-mode .btn-pill {
+    background: #fff;
+    color: #000;
+}
+
+.dark-mode .btn-pill:hover {
+    background: #e5e5e5;
+}
+
+/* Secondary Circle Buttons */
+.btn-icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #e5e5e5;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-icon-circle:hover {
+    border-color: #000;
+    transform: scale(1.08);
+}
+
+.dark-mode .btn-icon-circle {
+    border-color: #444;
+    color: #fff;
+}
+
+.dark-mode .btn-icon-circle:hover {
+    border-color: #fff;
+}
+
+/* IMAGE SIDE */
+.product-visual {
+    flex: 0.55;
+    /* 55% Width */
+    height: auto;
+    min-height: 500px;
+    background: #f4f4f4;
+    /* Slightly more distinct gray */
+    border-radius: 40px;
+    /* Softer radius */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    position: relative;
+}
+
+.dark-mode .product-visual {
+    background: #1c1c1c;
+}
+
+.product-img {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    /* Sleek shadow */
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-visual:hover .product-img {
+    transform: scale(1.03);
+}
+
+/* LOAD MORE */
+.load-more-wrapper {
+    margin-top: 6rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+}
+
+.text-link-btn {
+    background: none;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+    transition: all 0.2s;
+}
+
+.text-link-btn:hover {
+    gap: 0.9rem;
+    border-bottom-color: #1a1a1a;
+}
+
+.dark-mode .text-link-btn {
+    color: #fff;
+}
+
+.dark-mode .text-link-btn:hover {
+    border-bottom-color: #fff;
+}
+
+
+/* RESPONSIVE */
+@media screen and (max-width: 1024px) {
+    .products-section {
+        padding: 2rem 5% 4rem 5%;
+    }
+
+    .product-item,
+    .product-item.reverse {
+        flex-direction: column-reverse;
+        /* Stack: Image Top, Text Bottom */
+        gap: 3rem;
+        padding-bottom: 4rem;
+    }
+
+    .product-info {
+        width: 100%;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .product-visual {
+        width: 100%;
+        min-height: 400px;
+        padding: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .products-section {
+        padding: 2rem 1.5rem 4rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .product-brand {
+        font-size: 2rem;
+    }
+
+    .product-visual {
+        min-height: 300px;
+        padding: 1.5rem;
+        border-radius: 24px;
+    }
+
+    .product-actions {
+        flex-wrap: wrap;
+        /* Allow buttons to wrap if needed */
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .btn-pill {
+        flex: 1;
+        /* Grow to fill space */
+        width: auto;
+        min-width: 140px;
+        padding: 0 1.5rem;
+        height: 50px;
+    }
+
+    .btn-icon-circle {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .section-header {
+        margin-bottom: 3rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .product-brand {
+        font-size: 1.75rem;
+    }
+
+    .product-description {
+        font-size: 1rem;
+    }
+
+    .product-visual {
+        min-height: 250px;
+        padding: 1rem;
+        border-radius: 20px;
+    }
+
+    .product-actions {
+        margin-top: 1.5rem;
+    }
+
+    .btn-pill {
+        width: 100%;
+        /* Full width pill on mobile */
+        justify-content: center;
+    }
+
+    /* Make secondary buttons sit side-by-side below main button */
+    .product-actions .btn-icon-circle {
+        flex: 1;
+        border-radius: 12px;
+        /* Soft square on mobile for better touch area? No, keep circle or minimal */
+    }
+
+    .load-more-wrapper {
+        margin-top: 4rem;
+    }
+}
+
+/* Minimal Toast Stying */
+.minimal-toast {
+    position: fixed;
+    bottom: 120px;
+    /* Just above the pill nav */
+    left: 50%;
+    transform: translateX(-50%) !important;
+    /* Framer motion handles Y and scale, CSS handles X centering */
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 100000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    pointer-events: none;
+    /* Let clicks pass through if it overlaps something important? Maybe not needed for toast */
+    white-space: nowrap;
+}
+
+.toast-icon {
+    font-size: 1.1rem;
+}
+
+/* Removed empty scoped rule */
+
+/* Dark Mode Toast Override */
+body.dark-mode .minimal-toast {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+}

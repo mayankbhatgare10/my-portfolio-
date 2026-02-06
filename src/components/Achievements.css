@@ -1,209 +1,571 @@
-/* Achievements.css */
-
-#achievements {
+/* ACHIEVEMENTS - SCROLL LOCKED */
+.achievements-scroll-wrapper {
+  height: 100vh;
+  /* Further reduced to minimize gap */
   position: relative;
-  padding: 1rem 0;
-  margin-top: -1rem;
+  background: rgba(249, 250, 251, 0.4);
+  padding: 0;
+  margin: 0;
 }
 
-.achievements-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
+body.dark-mode .achievements-scroll-wrapper {
+  background: rgba(10, 10, 10, 0.4);
 }
 
-.achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.achievement-card {
-  background: rgb(250, 250, 250);
-  border: 1px solid rgb(163, 163, 163);
-  border-radius: 1.5rem;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  position: relative;
+.achievements-sticky-viewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* Center content vertically */
 }
 
-.achievement-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+.achievements-layout {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  /* Fixed Left, Fluid Right */
+  gap: 2rem;
+  /* Reduced gap for tigher alignment */
+  padding: 0 2rem;
+  height: 100%;
+  /* occupy full viewport */
 }
 
-.achievement-card::before {
-  content: "";
+/* LEFT COLUMN - Sticky Title */
+.achievements-intro-col {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* Visually center the title in the viewport */
+  justify-content: flex-start;
+}
+
+
+.static-section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #000;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.static-section-subtitle {
+  display: none;
+}
+
+body.dark-mode .static-section-title {
+  color: #fff;
+}
+
+/* RIGHT COLUMN - List Window */
+.achievements-list-window {
+  position: relative;
+  height: 100%;
+  display: flex;
+  /* alignment */
+  align-items: center;
+  /* Center list in viewport initially? Or let it scroll through center */
+  /* actually we want the 'window' to be the frame where list moves */
+}
+
+/* Timeline Track */
+.timeline-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Extended to bottom for fuller connection */
+  left: 50px;
+  width: 8px;
+  /* Slightly thinner for elegance */
+  z-index: 10;
+}
+
+.timeline-track-bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, #4caf50, #2196f3, #ff9800, #e91e63);
-  transition: all 0.3s ease;
+  height: 100%;
+  background: #e5e7eb;
+  /* Whitish-gray for unfilled path */
+  border-radius: 99px;
 }
 
-.achievement-header {
+body.dark-mode .timeline-track-bg {
+  background: #374151;
+  /* Darker gray for dark mode */
+}
+
+.timeline-track-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2563eb;
+  /* Solid Blue Only */
+  border-radius: 99px;
+}
+
+body.dark-mode .timeline-track-fill {
+  background: #3b82f6;
+  /* Bright Blue in Dark Mode */
+}
+
+/* List Column */
+.achievements-list-col {
+  width: 100%;
+  padding-left: 100px;
+  /* Aligned with track change */
+  position: relative;
+  z-index: 20;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  gap: 1.25rem;
+  /* Tighter gap between cards */
 }
 
-.achievement-type {
-  padding: 0.5rem 1rem;
-  border-radius: 1.5rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.achievement-type.winner {
-  background: #4caf50;
-  color: white;
-}
-
-.achievement-type.award {
-  background: #ff9800;
-  color: white;
-}
-
-.achievement-type.finalist {
-  background: #2196f3;
-  color: white;
-}
-
-.achievement-year {
-  background: #f0f0f0;
-  color: #333;
-  padding: 0.3rem 0.8rem;
-  border-radius: 1rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.achievement-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
-}
-
-.achievement-category {
-  font-size: 0.9rem;
-  color: #666;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.achievement-description {
-  font-size: 0.95rem;
-  color: #555;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.arrow {
-  display: block;
-  margin: 3rem auto;
-  width: 30px;
-  cursor: pointer;
+/* Timeline Dot */
+.timeline-dot {
+  position: absolute;
+  left: -46px;
+  /* Adjusted for new width/position */
+  top: 2rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  /* Default whitish-gray, will be overridden by motion value */
+  border: none;
+  /* No borders - solid only */
+  transform: translateX(-50%) translateY(0);
+  z-index: 30;
   transition: transform 0.3s ease;
 }
 
-.arrow:hover {
-  transform: translateY(3px);
+body.dark-mode .timeline-dot {
+  background: #374151;
+  /* Darker gray for dark mode */
 }
 
-/* Responsive Design */
+
+.achievement-accord-card:hover .timeline-dot {
+  transform: translateX(-50%) scale(1.15) translateY(0);
+  /* Keep centering */
+}
+
+/* Accordion Card Adjustments */
+.achievement-accord-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 1.25rem 2rem;
+  /* Compact padding */
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible;
+}
+
+/* Ensure dot is visible */
+.achievement-accord-card {
+  overflow: visible;
+}
+
+body.dark-mode .achievement-accord-card {
+  background: #000000;
+  /* Use black for cards in dark mode to pop against particles */
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+.achievement-accord-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-mode .achievement-accord-card:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: #0a0a0a;
+}
+
+/* Z-Index Handling for Stack */
+.achievement-accord-card.expanded {
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.08);
+  z-index: 50;
+  /* Bring to front */
+  position: relative !important;
+  /* Break sticky temporarily if needed, or keeping sticky but z-indexed */
+  /* Actually, to read full content without overlap, we might need to break the sticky flow or ensure margin. */
+}
+
+body.dark-mode .achievement-accord-card.expanded {
+  border-color: #60a5fa;
+  background: #050505;
+}
+
+/* Header Row */
+.accord-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.accord-brand {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.accord-logo-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: #f3f4f6;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+body.dark-mode .accord-logo-wrapper {
+  background: #1a1a1a;
+}
+
+.accord-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Crop center as requested */
+  object-position: center;
+}
+
+.accord-header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.accord-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.accord-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+body.dark-mode .accord-title {
+  color: #fff;
+}
+
+/* Header info row */
+.accord-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.accord-tag {
+  font-family: 'Hind Madurai', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+body.dark-mode .accord-tag {
+  background: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+}
+
+.accord-tag.inline {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  background: #000;
+  /* Black tag for distinction */
+  color: #fff;
+  border-radius: 50px;
+}
+
+body.dark-mode .accord-tag.inline {
+  background: #fff;
+  color: #000;
+}
+
+.accord-dot {
+  color: #ccc;
+  font-size: 0.8rem;
+}
+
+.accord-date {
+  font-family: 'Hind Madurai', sans-serif;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+body.dark-mode .accord-date {
+  color: #888;
+}
+
+/* Button Update: Minimal & Aesthetic */
+.accord-toggle-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+body.dark-mode .accord-toggle-btn {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.accord-toggle-btn.active {
+  transform: none;
+  background: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+body.dark-mode .accord-toggle-btn.active {
+  background: #fff;
+  border-color: #fff;
+  color: #000;
+}
+
+/* Short Desc */
+.accord-short-desc {
+  padding-left: calc(50px + 1.25rem);
+  /* Align with text, offset logo width */
+}
+
+.accord-role-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem 0;
+  display: block;
+}
+
+body.dark-mode .accord-role-label {
+  color: #60a5fa;
+}
+
+.accord-short-desc p {
+  font-family: 'Hind Madurai', sans-serif;
+  font-size: 1rem;
+  color: #444;
+  margin: 0;
+  line-height: 1.6;
+  text-align: justify !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  -ms-hyphens: auto !important;
+}
+
+body.dark-mode .accord-short-desc p {
+  color: #ccc;
+}
+
+/* Expanded Content */
+.accord-expanded-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+  padding-left: calc(50px + 1.25rem);
+}
+
+.accord-expanded-content.open {
+  max-height: 600px;
+  /* Enough to fit content */
+  opacity: 1;
+  margin-top: 1.5rem;
+}
+
+/* Expanded Content - Logic */
+.expanded-inner {
+  display: flex;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.dark-mode .expanded-inner {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Vertical Orientation (Stacked) - SIH/Agentic */
+.accord-expanded-content.vertical .expanded-inner {
+  flex-direction: column;
+}
+
+.accord-expanded-content.vertical .expanded-visual {
+  width: 100%;
+}
+
+.accord-expanded-content.vertical .expanded-hero-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+/* Horizontal Orientation (Left Text, Right Image) - INSD/CodeX */
+.accord-expanded-content.horizontal .expanded-inner {
+  flex-direction: row-reverse;
+  /* Image Right, Content Left */
+  align-items: flex-start;
+}
+
+.accord-expanded-content.horizontal .expanded-visual {
+  flex: 1;
+  max-width: 50%;
+}
+
+.accord-expanded-content.horizontal .expanded-story {
+  flex: 1;
+}
+
+.accord-expanded-content.horizontal .expanded-hero-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Common Visuals */
+.expanded-story {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.expanded-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+body.dark-mode .expanded-heading {
+  color: #fff;
+}
+
+.expanded-text {
+  font-family: 'Hind Madurai', sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  -ms-hyphens: auto !important;
+}
+
+body.dark-mode .expanded-text {
+  color: #ccc;
+}
+
+.expanded-text p {
+  margin-bottom: 0.75rem;
+  text-align: justify !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  -ms-hyphens: auto !important;
+}
+
+.expanded-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Overrides */
 @media screen and (max-width: 768px) {
-  .achievements-container {
-    padding: 1rem;
+
+  /* Force vertical on mobile for everything */
+  .accord-expanded-content.horizontal .expanded-inner {
+    flex-direction: column;
   }
 
-  .achievements-grid {
+  .accord-expanded-content.horizontal .expanded-visual {
+    max-width: 100%;
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 968px) {
+  .achievements-layout {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
-  .achievement-card {
-    padding: 1.5rem;
+  .achievements-intro-sticky {
+    position: relative;
+    top: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .achievements-section {
+    padding: 4rem 1rem;
   }
 
-  .achievement-title {
+  .achievement-accord-card {
+    padding: 1.25rem;
+  }
+
+  .accord-short-desc,
+  .accord-expanded-content {
+    padding-left: 0;
+    /* Removing offset on mobile for more space */
+  }
+
+  .accord-brand {
+    gap: 1rem;
+  }
+
+  .accord-logo-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .accord-title {
     font-size: 1.1rem;
   }
-
-  .achievement-description {
-    font-size: 0.9rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  #achievements {
-    padding: 2rem 0;
-  }
-
-  .achievements-container {
-    padding: 0.5rem;
-  }
-
-  .achievement-card {
-    padding: 1rem;
-  }
-
-  .achievement-header {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-
-  .achievement-title {
-    font-size: 1rem;
-  }
-
-  .achievement-description {
-    font-size: 0.85rem;
-  }
-
-  .achievement-type,
-  .achievement-year {
-    font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
-  }
-}
-
-/* Removed automatic animations - now using scroll-triggered AnimatedSection component */
-
-/* DARK MODE STYLES */
-body.dark-mode .achievement-card {
-  background: rgba(30, 30, 30, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.05);
-}
-
-body.dark-mode .achievement-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .achievement-title {
-  color: #ffffff;
-}
-
-body.dark-mode .achievement-description {
-  color: #e5e5e5;
-}
-
-body.dark-mode .achievement-year {
-  background: rgba(40, 40, 40, 0.8);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }

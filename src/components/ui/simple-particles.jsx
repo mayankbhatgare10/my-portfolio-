@@ -25,21 +25,20 @@ export default function SimpleParticles() {
               ? Math.random() * 3 + 2 // Elegant small particles
               : Math.random() * 4 + 3 // Elegant small particles
             : windowWidth <= 480
-            ? Math.random() * 4 + 1
-            : Math.random() * 6 + 1,
+              ? Math.random() * 4 + 1
+              : Math.random() * 6 + 1,
           duration: Math.random() * 15 + 8,
           opacity: isDarkMode
             ? Math.random() * 0.4 + 0.6
             : Math.random() * 0.6 + 0.1, // Elegant opacity for dark mode
           color: isDarkMode
             ? "#ffffff" // SOLID WHITE particles for dark mode
-            : `rgba(${
-                Math.random() > 0.5
-                  ? "59, 130, 246"
-                  : Math.random() > 0.5
-                  ? "147, 51, 234"
-                  : "34, 197, 94"
-              }, ${Math.random() * 0.5 + 0.2})`,
+            : `rgba(${Math.random() > 0.5
+              ? "59, 130, 246"
+              : Math.random() > 0.5
+                ? "147, 51, 234"
+                : "34, 197, 94"
+            }, ${Math.random() * 0.5 + 0.2})`,
         });
       }
       setParticles(newParticles);
@@ -66,7 +65,7 @@ export default function SimpleParticles() {
         width: "100vw",
         height: "100vh",
         pointerEvents: "none",
-        zIndex: 1, // Above background but below content
+        zIndex: 0, // Behind content (level 0 or higher)
         overflow: "hidden",
       }}
     >

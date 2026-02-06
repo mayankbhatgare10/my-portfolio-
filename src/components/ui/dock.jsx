@@ -62,10 +62,10 @@ const DockIcon = ({
             position: "absolute",
             ...(isVertical
               ? {
-                  right: "calc(100% + 10px)",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                }
+                right: "calc(100% + 10px)",
+                top: "50%",
+                transform: "translateY(-50%)",
+              }
               : { top: -40, left: "50%", transform: "translateX(-50%)" }),
             backgroundColor: "rgba(0, 0, 0, 0.8)",
             color: "white",
@@ -85,7 +85,7 @@ const DockIcon = ({
   );
 };
 
-export default function Dock() {
+export default function Dock({ hidden }) {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024
   );
@@ -100,63 +100,76 @@ export default function Dock() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        "profile",
-        "about",
-        "projects",
-        "experience",
-        "education",
-        "achievements",
-        "contact",
-      ];
+    const sections = [
+      "profile",
+      "about",
+      "achievements",
+      "products",
+      "contact",
+    ];
 
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-      let currentSection = "profile";
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0px -40% 0px', // Less aggressive margins
+      threshold: Array.from({ length: 21 }, (_, i) => i * 0.05) // 0, 0.05, 0.10, ... 1.0
+    };
 
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const sectionTop = element.offsetTop;
-          const sectionHeight = element.offsetHeight;
-          const sectionBottom = sectionTop + sectionHeight;
+    const sectionVisibility = new Map();
 
-          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-            currentSection = sectionId;
-            break;
-          }
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        sectionVisibility.set(entry.target.id, entry.intersectionRatio);
+        console.log(`📊 Section ${entry.target.id}: visibility = ${(entry.intersectionRatio * 100).toFixed(1)}%`);
+      });
+
+      // Find the section with the highest visibility ratio
+      let maxVisibility = 0;
+      let mostVisibleSection = "profile";
+
+      console.log("=== Current Visibility Map ===");
+      sectionVisibility.forEach((visibility, sectionId) => {
+        console.log(`  ${sectionId}: ${(visibility * 100).toFixed(1)}%`);
+        if (visibility > maxVisibility) {
+          maxVisibility = visibility;
+          mostVisibleSection = sectionId;
         }
-      }
+      });
 
-      // Only update if we're not in a clicked section or if we've scrolled to the clicked section
-      if (!lastClickedSection || currentSection === lastClickedSection) {
-        setActiveSection(currentSection);
-        if (lastClickedSection && currentSection === lastClickedSection) {
-          setLastClickedSection(null); // Reset once we've reached the clicked section
+      console.log(`✓ Most visible: ${mostVisibleSection} (${(maxVisibility * 100).toFixed(1)}%)`);
+
+      // Only update if we're not waiting for a clicked section to settle
+      if (!lastClickedSection || mostVisibleSection === lastClickedSection) {
+        console.log(`→ Setting active section to: ${mostVisibleSection}`);
+        setActiveSection(mostVisibleSection);
+        if (lastClickedSection && mostVisibleSection === lastClickedSection) {
+          setLastClickedSection(null);
         }
+      } else {
+        console.log(`⏸ Waiting for clicked section: ${lastClickedSection}`);
       }
     };
 
-    // Add scroll listener with throttling
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    console.log("🔍 Intersection Observer created with options:", observerOptions);
+
+    // Observe all sections
+    sections.forEach(sectionId => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        observer.observe(element);
+        sectionVisibility.set(sectionId, 0);
+        console.log(`✓ Observing section: ${sectionId}`);
+      } else {
+        console.warn(`✗ Section not found: ${sectionId}`);
       }
+    });
+
+    console.log("📋 Total sections being observed:", sectionVisibility.size);
+
+    return () => {
+      observer.disconnect();
     };
-
-    window.addEventListener("scroll", onScroll);
-    handleScroll(); // Initial check
-
-    return () => window.removeEventListener("scroll", onScroll);
   }, [lastClickedSection]);
-
-  // Show dock on all screen sizes now
-  // Removed the mobile restriction
 
   const dockItems = [
     {
@@ -202,72 +215,10 @@ export default function Dock() {
       ),
     },
     {
-      id: "projects",
-      href: "#projects",
-      section: "projects",
-      tooltip: "Projects",
-      icon: (
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-        </svg>
-      ),
-    },
-    {
-      id: "skills",
-      href: "#experience",
-      section: "experience",
-      tooltip: "Skills",
-      icon: (
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="3" />
-          <path d="m12 1 0 6m0 6 0 6m11-7-6 0m-6 0-6 0" />
-        </svg>
-      ),
-    },
-    {
-      id: "education",
-      href: "#education",
-      section: "education",
-      tooltip: "Education",
-      icon: (
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-          <path d="M6 12v5c3 3 9 3 12 0v-5" />
-        </svg>
-      ),
-    },
-    {
       id: "achievements",
       href: "#achievements",
       section: "achievements",
-      tooltip: "Achievements",
+      tooltip: "Awards",
       icon: (
         <svg
           width="16"
@@ -289,10 +240,10 @@ export default function Dock() {
       ),
     },
     {
-      id: "contact",
-      href: "#contact",
-      section: "contact",
-      tooltip: "Contact",
+      id: "products",
+      href: "#products",
+      section: "products",
+      tooltip: "Projects",
       icon: (
         <svg
           width="16"
@@ -304,53 +255,60 @@ export default function Dock() {
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-          <polyline points="22,6 12,13 2,6" />
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
         </svg>
       ),
     },
   ];
 
   const handleNavigation = (href, section) => {
-    // Set the clicked section as active and remember it
     setActiveSection(section);
     setLastClickedSection(section);
-
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  // Determine if we should use mobile layout (vertical dock in top-right)
   const isMobileLayout = windowWidth <= 768;
 
   return (
     <motion.div
       className="dock-container"
       initial={isMobileLayout ? { x: 100, opacity: 0 } : { y: 100, opacity: 0 }}
-      animate={isMobileLayout ? { x: 0, opacity: 1 } : { y: 0, opacity: 1 }}
+      animate={
+        hidden
+          ? isMobileLayout
+            ? { x: 150, opacity: 0 }
+            : { y: 150, opacity: 0 }
+          : isMobileLayout
+            ? { x: 0, opacity: 1 }
+            : { y: 0, opacity: 1 }
+      }
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
       style={{
         position: "fixed",
+        pointerEvents: hidden ? "none" : "auto",
         ...(isMobileLayout
           ? {
-              // Mobile: Top-right vertical layout
-              top: "20px",
-              right: "20px",
-              flexDirection: "column",
-              width: "fit-content",
-              height: "fit-content",
-            }
+            // Mobile: Top-right vertical layout
+            top: "20px",
+            right: "20px",
+            flexDirection: "column",
+            width: "fit-content",
+            height: "fit-content",
+          }
           : {
-              // Desktop: Bottom center horizontal layout
-              bottom: "24px",
-              left: "0",
-              right: "0",
-              width: "fit-content",
-              margin: "0 auto",
-              flexDirection: "row",
-            }),
+            // Desktop: Bottom center horizontal layout
+            bottom: "24px",
+            left: "0",
+            right: "0",
+            width: "fit-content",
+            margin: "0 auto",
+            flexDirection: "row",
+          }),
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -359,25 +317,21 @@ export default function Dock() {
             ? "8px"
             : "10px"
           : windowWidth <= 480
-          ? "12px"
-          : "16px",
+            ? "12px"
+            : "16px",
         padding: isMobileLayout
           ? windowWidth <= 480
             ? "12px 8px"
             : "16px 12px"
           : windowWidth <= 480
-          ? "16px 24px"
-          : "22px 36px",
-        backgroundColor: isDarkMode
-          ? "rgba(30, 30, 30, 0.9)"
-          : "rgba(255, 255, 255, 0.9)",
+            ? "16px 24px"
+            : "22px 36px",
+        backgroundColor: "#2d2d2d",
         backdropFilter: "blur(16px)",
         borderRadius: isMobileLayout ? "20px" : "24px",
-        border: isDarkMode
-          ? "1px solid rgba(255, 255, 255, 0.1)"
-          : "1px solid rgba(0, 0, 0, 0.1)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
         zIndex: 1000,
-        WebkitBackdropFilter: "blur(16px)", // Safari support
+        WebkitBackdropFilter: "blur(16px)",
         whiteSpace: "nowrap",
         maxWidth: isMobileLayout ? "fit-content" : "90vw",
         maxHeight: isMobileLayout ? "80vh" : "fit-content",
@@ -396,8 +350,8 @@ export default function Dock() {
                 ? 28
                 : 32
               : windowWidth <= 480
-              ? 32
-              : 36
+                ? 32
+                : 36
           }
           windowWidth={windowWidth}
           isVertical={isMobileLayout}
@@ -405,12 +359,8 @@ export default function Dock() {
           style={{
             color:
               activeSection === item.section
-                ? isDarkMode
-                  ? "rgba(255, 255, 255, 0.9)"
-                  : "rgba(0, 0, 0, 0.9)"
-                : isDarkMode
-                ? "rgba(255, 255, 255, 0.6)"
-                : "rgba(0, 0, 0, 0.6)",
+                ? "rgba(255, 255, 255, 1)"
+                : "rgba(255, 255, 255, 0.6)",
           }}
         >
           {item.icon}
@@ -422,21 +372,17 @@ export default function Dock() {
         style={{
           ...(isMobileLayout
             ? {
-                width: "24px",
-                height: "1px",
-                backgroundColor: isDarkMode
-                  ? "rgba(255, 255, 255, 0.2)"
-                  : "rgba(0, 0, 0, 0.2)",
-                margin: "4px 0",
-              }
+              width: "24px",
+              height: "1px",
+              backgroundColor: "rgba(255, 255, 255, 0.2)",
+              margin: "4px 0",
+            }
             : {
-                width: "1px",
-                height: "24px",
-                backgroundColor: isDarkMode
-                  ? "rgba(255, 255, 255, 0.2)"
-                  : "rgba(0, 0, 0, 0.2)",
-                margin: "0 4px",
-              }),
+              width: "1px",
+              height: "24px",
+              backgroundColor: "rgba(255, 255, 255, 0.2)",
+              margin: "0 4px",
+            }),
         }}
       />
       <DockIcon
@@ -447,14 +393,14 @@ export default function Dock() {
               ? 28
               : 32
             : windowWidth <= 480
-            ? 32
-            : 36
+              ? 32
+              : 36
         }
         windowWidth={windowWidth}
         isVertical={isMobileLayout}
         onClick={toggleDarkMode}
         style={{
-          color: isDarkMode ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.7)",
+          color: "rgba(255, 255, 255, 0.7)",
         }}
       >
         {isDarkMode ? (

@@ -1,0 +1,374 @@
+/* ========================================
+   COMPREHENSIVE RESPONSIVE FIXES
+   ======================================== */
+
+/* Mobile Warning Banner Spacing */
+body {
+    padding-top: 0;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 50px;
+        /* Space for mobile warning banner */
+    }
+}
+
+/* ========================================
+   PROFILE SECTION - RESPONSIVE
+   ======================================== */
+@media screen and (max-width: 968px) {
+    #profile {
+        padding: 2rem 1.5rem !important;
+        min-height: 85vh !important;
+    }
+
+    .section__text__p1 {
+        font-size: 1rem !important;
+    }
+
+    .title {
+        font-size: 2.5rem !important;
+    }
+
+    .section__text__p2 {
+        font-size: 1.1rem !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #profile {
+        padding: 1.5rem 1rem !important;
+        min-height: 80vh !important;
+    }
+
+    .title {
+        font-size: 2rem !important;
+    }
+
+    .section__text__p2 {
+        font-size: 1rem !important;
+    }
+}
+
+/* ========================================
+   ABOUT SECTION - RESPONSIVE
+   ======================================== */
+@media screen and (max-width: 968px) {
+    .about-container {
+        padding: 3rem 1.5rem !important;
+    }
+
+    .about-layout {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    .about-left-col {
+        position: relative !important;
+        height: auto !important;
+    }
+
+    .about-profile-card {
+        position: relative !important;
+        top: 0 !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .about-container {
+        padding: 2rem 1rem !important;
+    }
+
+    .about-stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+    }
+}
+
+/* ========================================
+   ACHIEVEMENTS SECTION - RESPONSIVE
+   ======================================== */
+@media screen and (max-width: 968px) {
+    .achievements-scroll-wrapper {
+        height: auto !important;
+        min-height: 100vh;
+    }
+
+    .achievements-layout {
+        grid-template-columns: 1fr !important;
+        padding: 2rem 1.5rem !important;
+    }
+
+    .achievements-intro-col {
+        position: relative !important;
+        height: auto !important;
+        margin-bottom: 2rem;
+    }
+
+    .static-section-title {
+        font-size: 2.5rem !important;
+    }
+
+    .timeline-container {
+        left: 20px !important;
+    }
+
+    .achievements-list-col {
+        padding-left: 60px !important;
+    }
+
+    .timeline-dot {
+        left: -36px !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .achievements-layout {
+        padding: 1.5rem 1rem !important;
+    }
+
+    .static-section-title {
+        font-size: 2rem !important;
+    }
+
+    .achievement-accord-card {
+        padding: 1rem !important;
+    }
+
+    .accord-title {
+        font-size: 1.1rem !important;
+    }
+
+    .accord-short-desc {
+        padding-left: 0 !important;
+    }
+
+    .accord-expanded-content {
+        padding-left: 0 !important;
+    }
+}
+
+/* ========================================
+   PRODUCTS SECTION - RESPONSIVE
+   ======================================== */
+@media screen and (max-width: 968px) {
+    .products-section {
+        padding: 4rem 1.5rem !important;
+    }
+
+    .products-list {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    .section-title {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .products-section {
+        padding: 3rem 1rem !important;
+    }
+
+    .section-title {
+        font-size: 2rem !important;
+    }
+
+    .product-card {
+        padding: 1.25rem !important;
+    }
+
+    .product-title {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* ========================================
+   FOOTER - RESPONSIVE
+   ======================================== */
+@media screen and (max-width: 968px) {
+    .footer-section {
+        padding: 3rem 1.5rem 2rem 1.5rem !important;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+        text-align: center;
+    }
+
+    .footer-column {
+        align-items: center !important;
+    }
+
+    .footer-links {
+        align-items: center !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .footer-section {
+        padding: 2rem 1rem 1.5rem 1rem !important;
+    }
+
+    .footer-logo {
+        font-size: 1.5rem !important;
+    }
+
+    .footer-link {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ========================================
+   TOAST NOTIFICATION - RESPONSIVE
+   ======================================== */
+@media screen and (max-width: 768px) {
+    .minimal-toast {
+        bottom: 90px !important;
+        /* Adjust for smaller pill nav */
+        font-size: 0.8rem !important;
+        padding: 0.6rem 1.2rem !important;
+        max-width: 85vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .minimal-toast {
+        bottom: 80px !important;
+        font-size: 0.75rem !important;
+        padding: 0.5rem 1rem !important;
+        max-width: 90vw;
+    }
+
+    .toast-icon {
+        font-size: 0.9rem;
+    }
+}
+
+/* ========================================
+   PILL NAV - RESPONSIVE ADJUSTMENTS
+   ======================================== */
+@media screen and (max-width: 768px) {
+    .pill-nav-container {
+        bottom: 20px !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .pill-nav-container {
+        bottom: 16px !important;
+    }
+}
+
+/* ========================================
+   GENERAL RESPONSIVE UTILITIES
+   ======================================== */
+@media screen and (max-width: 968px) {
+
+    /* Ensure no horizontal overflow */
+    body,
+    html {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    /* Adjust all section padding */
+    section {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    section {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Reduce all heading sizes */
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    h2 {
+        font-size: 1.75rem !important;
+    }
+
+    h3 {
+        font-size: 1.25rem !important;
+    }
+
+    /* Adjust button sizes */
+    button,
+    .btn {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ========================================
+   LANDSCAPE MOBILE FIXES
+   ======================================== */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    #profile {
+        min-height: auto !important;
+        padding: 2rem 1rem !important;
+    }
+
+    .mobile-warning-banner {
+        font-size: 0.65rem !important;
+        padding: 0.4rem 0.5rem !important;
+    }
+}
+
+/* ========================================
+   VERY SMALL SCREENS - below 360px
+   ======================================== */
+@media screen and (max-width: 360px) {
+    .mobile-warning-banner {
+        font-size: 0.65rem !important;
+        padding: 0.5rem 0.5rem !important;
+    }
+
+    .minimal-toast {
+        font-size: 0.7rem !important;
+        padding: 0.4rem 0.8rem !important;
+    }
+
+    .pill-nav-container {
+        padding: 5px 6px !important;
+    }
+}
+
+/* ========================================
+   LARGE SCREENS - above 1400px
+   ======================================== */
+@media screen and (min-width: 1400px) {
+
+    .achievements-layout,
+    .about-container,
+    .products-section {
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* ========================================
+   ULTRA WIDE SCREENS - above 1920px
+   ======================================== */
+@media screen and (min-width: 1920px) {
+
+    .achievements-layout,
+    .about-container,
+    .products-section {
+        max-width: 1600px;
+    }
+
+    .section-title {
+        font-size: 4rem !important;
+    }
+}

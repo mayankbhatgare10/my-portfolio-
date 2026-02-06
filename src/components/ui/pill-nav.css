@@ -1,0 +1,153 @@
+/* ========================================
+   PILL NAV RESPONSIVE STYLES
+   ======================================== */
+
+.pill-nav-container {
+    width: fit-content !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* Desktop - Full labels */
+@media (min-width: 769px) {
+    .pill-nav-container {
+        max-width: fit-content;
+    }
+}
+
+/* Tablet - Slightly smaller */
+@media (max-width: 768px) and (min-width: 481px) {
+    .pill-nav-container {
+        padding: 6px 10px !important;
+        gap: 6px !important;
+    }
+
+    .pill-nav-item {
+        padding: 8px 16px !important;
+        font-size: 0.85rem !important;
+    }
+
+    .pill-nav-toggle {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .pill-nav-toggle svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+}
+
+/* Mobile - Compact with icons */
+@media (max-width: 480px) {
+    .pill-nav-container {
+        bottom: 16px !important;
+        padding: 6px 8px !important;
+        gap: 4px !important;
+    }
+
+    .pill-nav-item {
+        padding: 8px 12px !important;
+        font-size: 0.75rem !important;
+    }
+
+    .pill-nav-toggle {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .pill-nav-toggle svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+}
+
+/* Very small screens - Ultra compact */
+@media (max-width: 360px) {
+    .pill-nav-container {
+        bottom: 12px !important;
+        padding: 4px 6px !important;
+        gap: 2px !important;
+    }
+
+    .pill-nav-item {
+        padding: 6px 10px !important;
+        font-size: 0.7rem !important;
+    }
+
+    .pill-nav-toggle {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .pill-nav-toggle svg {
+        width: 12px !important;
+        height: 12px !important;
+    }
+}
+
+/* Landscape mode on mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    .pill-nav-container {
+        bottom: 12px !important;
+        padding: 4px 8px !important;
+    }
+
+    .pill-nav-item {
+        padding: 6px 12px !important;
+        font-size: 0.75rem !important;
+    }
+}
+
+/* Ensure pill nav doesn't interfere with footer */
+.pill-nav-container {
+    pointer-events: auto;
+}
+
+.pill-nav-container * {
+    pointer-events: auto;
+}
+
+/* Smooth transitions */
+.pill-nav-item,
+.pill-nav-toggle {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Active state enhancement */
+.pill-nav-active-bg {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover states for desktop */
+@media (hover: hover) and (pointer: fine) {
+    .pill-nav-item:hover {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    body.dark-mode .pill-nav-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .pill-nav-toggle:hover {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    body.dark-mode .pill-nav-toggle:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Focus states for accessibility */
+.pill-nav-item:focus-visible,
+.pill-nav-toggle:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Print - hide navigation */
+@media print {
+    .pill-nav-container {
+        display: none !important;
+    }
+}

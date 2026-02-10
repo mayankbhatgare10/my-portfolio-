@@ -543,29 +543,66 @@ body.dark-mode .expanded-text {
 
 @media screen and (max-width: 600px) {
   .achievements-section {
-    padding: 4rem 1rem;
+    padding: 3rem 1rem;
   }
 
+  /* Adjust Layout & Padding */
+  .achievements-layout {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  /* Make Title Smaller */
+  .static-section-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Adjust Timeline Position */
+  .timeline-container {
+    left: 10px !important;
+    width: 4px !important;
+    /* Thinner line */
+  }
+
+  /* Adjust Content Padding */
+  .achievements-list-col {
+    padding-left: 40px !important;
+    /* Less indent */
+  }
+
+  /* Adjust Dot Position */
+  .timeline-dot {
+    left: -28px !important;
+    /* Re-align with new timeline pos */
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  /* Adjust Card Padding */
   .achievement-accord-card {
-    padding: 1.25rem;
+    padding: 1rem;
+  }
+
+  .accord-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .accord-brand {
+    width: 100%;
+  }
+
+  .accord-toggle-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
 
   .accord-short-desc,
   .accord-expanded-content {
     padding-left: 0;
-    /* Removing offset on mobile for more space */
-  }
-
-  .accord-brand {
-    gap: 1rem;
-  }
-
-  .accord-logo-wrapper {
-    width: 40px;
-    height: 40px;
-  }
-
-  .accord-title {
-    font-size: 1.1rem;
   }
 }

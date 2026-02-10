@@ -1,17 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import "./About.css";
-import profilePic from "../assets/Professional LinkedIn Profile Picture.png";
 import Confetti from "./ui/confetti";
 import InfiniteTape from "./ui/infinite-tape";
 import TechTicker from "./ui/tech-ticker";
 
+const PROFILE_IMAGE =
+  "https://4ekvzr5zup.ufs.sh/f/NwWZp9fksM6pCtkhLVzOHZneoRXwE8Qt3vbdczIVsGxmq2hO";
+
 const About = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [confettiTrigger, setConfettiTrigger] = useState(0);
+  const sectionRef = useRef(null);
 
+  /* ── scroll tracking for the entire About section ── */
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  /* ── Entry animations (driven by scroll) ── */
+
+  // Profile image slides in from left
+  const imageX = useTransform(scrollYProgress, [0.02, 0.14], [-280, 0]);
+  const imageOpacity = useTransform(scrollYProgress, [0.02, 0.14], [0, 1]);
+  const imageScale = useTransform(scrollYProgress, [0.02, 0.14], [0.85, 1]);
+
+  // Sidebar details (stats, buttons, social) fade in + rise
+  const detailsOpacity = useTransform(scrollYProgress, [0.08, 0.18], [0, 1]);
+  const detailsY = useTransform(scrollYProgress, [0.08, 0.18], [50, 0]);
+
+  // About Me card slides in from right
+  const aboutCardX = useTransform(scrollYProgress, [0.04, 0.16], [350, 0]);
+  const aboutCardOpacity = useTransform(scrollYProgress, [0.04, 0.16], [0, 1]);
+
+  // Experience card slides up + fades in (slightly later)
+  const expCardY = useTransform(scrollYProgress, [0.18, 0.28], [80, 0]);
+  const expCardOpacity = useTransform(scrollYProgress, [0.18, 0.28], [0, 1]);
+
+  /* ── event handlers ── */
   const handleKudos = (e) => {
     e.preventDefault();
-    setConfettiTrigger(prev => prev + 1);
+    setConfettiTrigger((prev) => prev + 1);
     setShowConfetti(true);
     setTimeout(() => setShowConfetti(false), 4500);
   };
@@ -39,7 +69,16 @@ const About = () => {
       name: "Instagram",
       url: "https://www.instagram.com/imbhatgare_mb/",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -50,7 +89,14 @@ const About = () => {
       name: "Email",
       url: "mailto:bhatgare.mayank10@gmail.com",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
           <polyline points="22,6 12,13 2,6" />
         </svg>
@@ -59,24 +105,35 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="about-section">
+    <section id="about" className="about-section" ref={sectionRef}>
+      {/* ── Design Stack tape (lower z-index, cards scroll above it) ── */}
       <InfiniteTape />
 
       <div className="about-container-locked">
-        {/* Left Column: Sticky Sidebar */}
+        {/* ═══════ LEFT: Sticky Sidebar ═══════ */}
         <div className="about-sidebar-fixed">
           <div className="about-sidebar-content">
-            {/* Profile Image */}
-            <div className="about-image-wrapper">
+            {/* Profile Image — slides from left */}
+            <motion.div
+              className="about-image-wrapper"
+              style={{
+                x: imageX,
+                opacity: imageOpacity,
+                scale: imageScale,
+              }}
+            >
               <img
-                src={profilePic}
+                src={PROFILE_IMAGE}
                 alt="Mayank Bhatgare - Professional Profile"
                 className="about-profile-image"
               />
-            </div>
+            </motion.div>
 
-            {/* Stats Section */}
-            <div className="about-stats-container">
+            {/* Stats — fade-in + rise */}
+            <motion.div
+              className="about-stats-container"
+              style={{ opacity: detailsOpacity, y: detailsY }}
+            >
               <div className="about-stat-item">
                 <span className="stat-value">1.5+</span>
                 <span className="stat-label">Years of Experience</span>
@@ -89,10 +146,13 @@ const About = () => {
                 <span className="stat-value">7x</span>
                 <span className="stat-label">Finales Attended</span>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Resume & Kudos Row */}
-            <div className="action-buttons-row">
+            {/* Resume & Kudos — fade-in + rise */}
+            <motion.div
+              className="action-buttons-row"
+              style={{ opacity: detailsOpacity, y: detailsY }}
+            >
               <a
                 href="https://flowcv.com/resume/2t6ojvqekoae"
                 target="_blank"
@@ -100,7 +160,14 @@ const About = () => {
                 className="resume-link-button black-button"
               >
                 View Resume
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg>
               </a>
@@ -111,15 +178,27 @@ const About = () => {
                 aria-label="Give Kudos"
                 title="Give Kudos"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
                 </svg>
               </button>
-            </div>
+            </motion.div>
 
-            {/* Social Links Row */}
-            <div className="social-icons-row">
-              {socialLinks.filter(link => !link.isKudos).map((link) => (
+            {/* Social Links — fade-in + rise */}
+            <motion.div
+              className="social-icons-row"
+              style={{ opacity: detailsOpacity, y: detailsY }}
+            >
+              {socialLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.url}
@@ -132,60 +211,114 @@ const About = () => {
                   {link.icon}
                 </a>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Confetti Effect */}
-        <Confetti active={showConfetti} trigger={confettiTrigger} />
-
-        {/* Right Column: Scrollable Content */}
+        {/* ═══════ RIGHT: Scrollable Cards (scroll above tape) ═══════ */}
         <div className="about-cards-scrollable">
-          {/* About Me Card */}
-          <div className="about-text-section">
+          {/* About Me Card — slides from right */}
+          <motion.div
+            className="about-text-section"
+            style={{ x: aboutCardX, opacity: aboutCardOpacity }}
+          >
             <h2 className="about-heading">About Me</h2>
             <div className="about-text">
               <p>
-                I'm a Product Designer focused on translating complex ideas into intuitive, high-impact digital experiences. With 1.5+ years in UI/UX, I've contributed to real-world products where design directly shapes usability, business outcomes, and user behavior.
+                I'm a Product Designer focused on translating complex ideas into
+                intuitive, high-impact digital experiences. With 1.5+ years in
+                UI/UX, I've contributed to real-world products where design
+                directly shapes usability, business outcomes, and user behavior.
               </p>
               <p>
-                As Lead UI/UX at Infobytes Technosys, I've driven end-to-end design for client and in-house products, including PayTrakz — an expense management platform designed from research to developer handoff. I enjoy navigating the full product lifecycle, aligning user needs, business logic, and technical feasibility into cohesive solutions.
+                As Lead UI/UX at Infobytes Technosys, I've driven end-to-end
+                design for client and in-house products, including PayTrakz — an
+                expense management platform designed from research to developer
+                handoff. I enjoy navigating the full product lifecycle, aligning
+                user needs, business logic, and technical feasibility into
+                cohesive solutions.
               </p>
               <p>
-                My frontend background (React, Next.js, TypeScript) informs a systems-aware design approach, enabling me to create scalable, build-ready interfaces. I value clarity, structure, and intentionality over visual noise.
+                My frontend background (React, Next.js, TypeScript) informs a
+                systems-aware design approach, enabling me to create scalable,
+                build-ready interfaces. I value clarity, structure, and
+                intentionality over visual noise.
               </p>
               <p>
-                Hackathons and innovation environments have shaped my problem-solving mindset — from being a finalist at SIH and CodeXcaliber (IIIT Nagpur) to presenting a breakthrough concept at Google Agentic AI Day. These experiences strengthened my ability to think critically, iterate quickly, and design under constraints.
+                Hackathons and innovation environments have shaped my
+                problem-solving mindset — from being a finalist at SIH and
+                CodeXcaliber (IIIT Nagpur) to presenting a breakthrough concept
+                at Google Agentic AI Day. These experiences strengthened my
+                ability to think critically, iterate quickly, and design under
+                constraints.
               </p>
               <p>
-                I gravitate toward minimal, product-driven design where every element serves a purpose, aiming to build solutions that are not just usable, but meaningful.
+                I gravitate toward minimal, product-driven design where every
+                element serves a purpose, aiming to build solutions that are not
+                just usable, but meaningful.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Experience Card */}
-          <div className="about-experience-section">
+          {/* Experience Card — rises up + fades in */}
+          <motion.div
+            className="about-experience-section"
+            style={{ y: expCardY, opacity: expCardOpacity }}
+          >
             <h2 className="about-heading">Experience</h2>
             <div className="experience-card">
               <div className="experience-header">
                 <h3 className="experience-role">UI/UX Team Lead</h3>
                 <p className="experience-company">Infobytes Technosys</p>
-                <p className="experience-duration">Aug 2024 – Present | Pune, India</p>
+                <p className="experience-duration">
+                  Aug 2024 – Present | Pune, India
+                </p>
               </div>
               <ul className="experience-highlights">
-                <li>Leading UI/UX across client and in-house products, translating business requirements into structured, scalable, and production-ready experiences.</li>
-                <li>Delivered UI/UX for multiple digital products, balancing user needs, business goals, and technical constraints.</li>
-                <li>Spearheaded a full redesign of the in-house mobile app, refining navigation architecture, visual hierarchy, and interaction clarity.</li>
-                <li>Designed web platforms end-to-end, from user flows and wireframes to high-fidelity interfaces and developer-ready specifications.</li>
-                <li>Systematized reusable components and design patterns to ensure cross-product consistency and reduce iteration cycles.</li>
-                <li>Shipped a role-based dairy platform with distinct Customer and Admin ecosystems, defining workflows, dashboards, and permissions.</li>
-                <li>Drove stakeholder alignment through structured design reviews, accelerating approvals and handoff clarity.</li>
-                <li>Led design QA and cross-device validation to maintain implementation accuracy and production quality.</li>
+                <li>
+                  Leading UI/UX across client and in-house products, translating
+                  business requirements into structured, scalable, and
+                  production-ready experiences.
+                </li>
+                <li>
+                  Delivered UI/UX for multiple digital products, balancing user
+                  needs, business goals, and technical constraints.
+                </li>
+                <li>
+                  Spearheaded a full redesign of the in-house mobile app,
+                  refining navigation architecture, visual hierarchy, and
+                  interaction clarity.
+                </li>
+                <li>
+                  Designed web platforms end-to-end, from user flows and
+                  wireframes to high-fidelity interfaces and developer-ready
+                  specifications.
+                </li>
+                <li>
+                  Systematized reusable components and design patterns to ensure
+                  cross-product consistency and reduce iteration cycles.
+                </li>
+                <li>
+                  Shipped a role-based dairy platform with distinct Customer and
+                  Admin ecosystems, defining workflows, dashboards, and
+                  permissions.
+                </li>
+                <li>
+                  Drove stakeholder alignment through structured design reviews,
+                  accelerating approvals and handoff clarity.
+                </li>
+                <li>
+                  Led design QA and cross-device validation to maintain
+                  implementation accuracy and production quality.
+                </li>
               </ul>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
+
+      {/* Confetti Effect */}
+      <Confetti active={showConfetti} trigger={confettiTrigger} />
 
       <TechTicker />
     </section>

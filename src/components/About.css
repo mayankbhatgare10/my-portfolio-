@@ -1,7 +1,9 @@
-/* ABOUT SECTION */
+/* ═══════════════════════════════════════════
+   ABOUT SECTION — Scroll-locked layout
+   ═══════════════════════════════════════════ */
+
 .about-section {
   padding: 0 2rem 0;
-  /* Remove all vertical padding to eliminate gaps */
   min-height: auto;
   background: rgba(249, 250, 251, 0.4);
   position: relative;
@@ -11,7 +13,7 @@ body.dark-mode .about-section {
   background: rgba(10, 10, 10, 0.4);
 }
 
-/* SCROLL-LOCKED LAYOUT */
+/* ─── SCROLL-LOCKED GRID ─── */
 .about-container-locked {
   max-width: 1400px;
   width: 100%;
@@ -22,57 +24,23 @@ body.dark-mode .about-section {
   align-items: start;
   padding: 2rem 0;
   position: relative;
+  z-index: 60;
+  /* Higher than the Design Stack tape (40) */
 }
 
-/* LEFT SIDEBAR - STICKY */
+/* ─── LEFT: STICKY SIDEBAR ─── */
 .about-sidebar-fixed {
   position: sticky;
   top: 140px;
   align-self: start;
   background: none;
-  z-index: 90;
-}
-
-/* RIGHT SIDE - SCROLLABLE CARDS */
-.about-cards-scrollable {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.about-container {
-  max-width: 1400px;
-  width: 100%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 350px 1fr;
-  gap: 4rem;
-  align-items: start;
-  padding-top: 8rem;
-  /* Push content down below Tape */
-}
-
-/* LEFT SIDEBAR - STICKY */
-.about-sidebar {
-  position: sticky;
-  top: 140px;
-  /* Lock below the tape (Tape height + gap) */
-  align-self: start;
-  background: none;
-  z-index: 50;
-  /* Ensure layering above tape */
-}
-
-.about-sidebar::before,
-.about-sidebar::after {
-  display: none !important;
+  z-index: 70;
 }
 
 .about-sidebar-content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* Reduced from 1.5rem */
   background: none;
 }
 
@@ -81,16 +49,36 @@ body.dark-mode .about-section {
   display: none !important;
 }
 
-/* Profile Image */
+/* ─── RIGHT: SCROLLABLE CARDS ─── */
+.about-cards-scrollable {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: relative;
+  z-index: 80;
+  /* Cards scroll ABOVE the tape */
+}
+
+/* ═══════════════════════════════════════════
+   PROFILE IMAGE
+   ═══════════════════════════════════════════ */
 .about-image-wrapper {
   width: 100%;
+  height: auto;
+  /* Allow full height */
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   position: relative;
   z-index: 1;
-  background: none;
+  background: #fdfdfd;
+  /* Solid background helps performance */
+  will-change: transform;
+  /* Optimize specific changes */
+  transform: translateZ(0);
+  /* Force GPU */
+  backface-visibility: hidden;
 }
 
 .about-image-wrapper::before,
@@ -99,70 +87,37 @@ body.dark-mode .about-section {
 }
 
 .about-image-wrapper:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  /* keeping shadow static for performance */
 }
 
 .about-profile-image {
   width: 100%;
   height: auto;
+  /* Natural Height - No cropping */
   display: block;
   object-fit: cover;
   position: relative;
   z-index: 2;
   background: none;
+  border-radius: 20px;
 }
 
-/* Resume Link Button - Ultra Minimal */
-.resume-link-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #ffffff !important;
-  background-image: none !important;
-  backdrop-filter: none !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-  color: #333;
-  text-decoration: none;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  font-family: 'Hind Madurai', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
+.about-image-wrapper:hover .about-profile-image {
+  transform: scale(1.05);
+  /* Subtle zoom on hover */
 }
 
-.resume-link-button:hover {
-  border-color: #2563eb;
-  color: #2563eb;
-  background: rgba(37, 99, 235, 0.03);
-  transform: translateY(-1px);
-}
-
-.resume-link-button svg {
-  transition: transform 0.3s ease;
-}
-
-.resume-link-button:hover svg {
-  transform: translate(2px, -2px);
-}
-
-/* Stats Container */
+/* ═══════════════════════════════════════════
+   STATS
+   ═══════════════════════════════════════════ */
 .about-stats-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 0.25rem 0.5rem;
-  /* Reduced padding */
   margin-bottom: 0.25rem;
-  /* Reduced margin */
+  will-change: transform, opacity;
 }
 
 .about-stat-item {
@@ -191,11 +146,50 @@ body.dark-mode .about-section {
   max-width: 80px;
 }
 
-/* Resume & Kudos Row */
+/* ═══════════════════════════════════════════
+   BUTTONS — Resume & Kudos
+   ═══════════════════════════════════════════ */
 .action-buttons-row {
   display: flex;
   gap: 0.75rem;
   align-items: stretch;
+  will-change: transform, opacity;
+}
+
+.resume-link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  color: #333;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: 'Hind Madurai', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.resume-link-button:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.03);
+  transform: translateY(-1px);
+}
+
+.resume-link-button svg {
+  transition: transform 0.3s ease;
+}
+
+.resume-link-button:hover svg {
+  transform: translate(2px, -2px);
 }
 
 .resume-link-button.black-button {
@@ -203,7 +197,6 @@ body.dark-mode .about-section {
   color: #ffffff;
   border: 1px solid transparent;
   flex: 1;
-  /* Takes up remaining space */
   justify-content: center;
 }
 
@@ -218,7 +211,6 @@ body.dark-mode .about-section {
   align-items: center;
   justify-content: center;
   width: 45px;
-  /* Fixed width */
   background-color: #ffffff !important;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -238,11 +230,14 @@ body.dark-mode .about-section {
   transform: scale(0.95);
 }
 
-/* Social Icons Row */
+/* ═══════════════════════════════════════════
+   SOCIAL ICONS
+   ═══════════════════════════════════════════ */
 .social-icons-row {
   display: flex;
   gap: 0.75rem;
   margin-top: 0.25rem;
+  will-change: transform, opacity;
 }
 
 .social-icon-box {
@@ -266,102 +261,12 @@ body.dark-mode .about-section {
   transform: translateY(-2px);
 }
 
-/*
-/* Say Hello Box */
-.say-hello-box {
-  background-color: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
-  padding: 1rem;
-  /* Reduced from 1.5rem */
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  /* Reduced from 1.25rem */
-  transition: all 0.3s ease;
-  margin-top: 0.25rem;
-  /* Reduced from 0.5rem */
-}
-
-.say-hello-box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-}
-
-.social-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #000;
-  margin: 0;
-  letter-spacing: -0.01em;
-  text-align: center;
-}
-
-/*
-/* Social Links Grid - 3x2 */
-.social-links-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-}
-
-.social-grid-link {
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff !important;
-  background-image: none !important;
-  backdrop-filter: none !important;
-  opacity: 1 !important;
-  mix-blend-mode: normal !important;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
-  color: #333;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.social-grid-link:hover {
-  background: rgba(37, 99, 235, 0.05);
-  /* Very subtle tint */
-  border-color: #2563eb;
-  color: #2563eb;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
-  /* Softer shadow */
-}
-
-.social-grid-link svg {
-  width: 22px;
-  height: 22px;
-}
-
-.kudos-button {
-  cursor: pointer;
-  outline: none;
-  font-family: inherit;
-  padding: 0;
-  /* Ensure it keeps the border defined in .social-grid-link */
-}
-
-.kudos-button:active {
-  transform: translateY(-2px) scale(0.95);
-}
-
-/* RIGHT MAIN CONTENT */
-.about-main-content {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-/* About Text Section */
+/* ═══════════════════════════════════════════
+   ABOUT ME CARD (scrolls above tape)
+   ═══════════════════════════════════════════ */
 .about-text-section {
   position: relative;
-  z-index: 50;
+  z-index: 80;
   background-color: #ffffff !important;
   background-image: none !important;
   backdrop-filter: none !important;
@@ -370,13 +275,13 @@ body.dark-mode .about-section {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 20px;
   padding: 3rem;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  will-change: transform, opacity;
 }
 
 .about-text-section:hover {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .about-heading {
@@ -403,10 +308,12 @@ body.dark-mode .about-section {
   margin-bottom: 0;
 }
 
-/* Experience Section */
+/* ═══════════════════════════════════════════
+   EXPERIENCE CARD (scrolls above tape)
+   ═══════════════════════════════════════════ */
 .about-experience-section {
   position: relative;
-  z-index: 50;
+  z-index: 80;
   background-color: #ffffff !important;
   background-image: none !important;
   backdrop-filter: none !important;
@@ -415,13 +322,13 @@ body.dark-mode .about-section {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 20px;
   padding: 3rem;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  will-change: transform, opacity;
 }
 
 .about-experience-section:hover {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .experience-card {
@@ -491,7 +398,9 @@ body.dark-mode .about-section {
   font-size: 1.2rem;
 }
 
-/* DARK MODE */
+/* ═══════════════════════════════════════════
+   DARK MODE
+   ═══════════════════════════════════════════ */
 body.dark-mode .resume-link-button {
   background: #000000 !important;
   border-color: rgba(255, 255, 255, 0.2);
@@ -500,7 +409,6 @@ body.dark-mode .resume-link-button {
 
 body.dark-mode .resume-link-button.black-button {
   background: #ffffff !important;
-  /* Invert for dark mode so it pops? Or keep black? usually white pops on black */
   color: #000000;
   border-color: transparent;
 }
@@ -523,30 +431,17 @@ body.dark-mode .social-icon-box:hover {
   background: rgba(96, 165, 250, 0.1) !important;
 }
 
-body.dark-mode .social-grid-link {
-  background: #000000 !important;
-  border-color: rgba(255, 255, 255, 0.08);
-  color: #e5e5e5;
-}
-
-body.dark-mode .social-grid-link:hover {
-  background: #60a5fa;
-  border-color: #60a5fa;
-  color: #ffffff;
-}
-
 body.dark-mode .about-text-section,
 body.dark-mode .about-experience-section {
   background: #000000 !important;
-  /* Proper Solid Black */
   border-color: rgba(255, 255, 255, 0.08);
   opacity: 1 !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
 body.dark-mode .about-text-section:hover,
 body.dark-mode .about-experience-section:hover {
-  background: #252525;
-  /* Solid Dark Hover */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode .about-heading {
@@ -581,29 +476,57 @@ body.dark-mode .experience-header {
   border-bottom-color: rgba(96, 165, 250, 0.2);
 }
 
-/* RESPONSIVE */
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
 @media screen and (max-width: 1200px) {
-  .about-container {
+  .about-container-locked {
     grid-template-columns: 300px 1fr;
     gap: 3rem;
   }
 }
 
 @media screen and (max-width: 968px) {
-  .about-container {
+  .about-container-locked {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
 
-  .about-sidebar {
+  .about-sidebar-fixed {
     position: relative;
     top: 0;
-    transform: none;
+    width: 100%;
+    margin-bottom: 2rem;
+    z-index: 1;
+    /* Reset z-index since it's not sticky */
   }
 
   .about-sidebar-content {
-    max-width: 400px;
+    max-width: 100%;
+    /* Let it fill */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center everything */
     margin: 0 auto;
+  }
+
+  .about-stats-container {
+    width: 100%;
+    max-width: 500px;
+    /* Constrain width of stats on mobile */
+    margin: 1rem auto;
+  }
+
+  .action-buttons-row {
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+  }
+
+  .about-image-wrapper {
+    max-width: 350px;
+    margin: 0 auto 1rem auto;
   }
 }
 
@@ -654,9 +577,5 @@ body.dark-mode .experience-header {
 
   .about-text {
     font-size: 0.95rem;
-  }
-
-  .about-main-content {
-    gap: 2rem;
   }
 }

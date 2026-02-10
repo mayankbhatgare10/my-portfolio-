@@ -30,7 +30,7 @@ const InfiniteTape = () => {
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'visible', // Allow tape to extend fully
-      zIndex: 100,
+      zIndex: 40,
       marginTop: '0',
       marginBottom: '4rem', // Space below tape before content
     }}>
@@ -122,6 +122,20 @@ const InfiniteTape = () => {
         @keyframes tapeScroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-100%); }
+        }
+
+        @media screen and (max-width: 768px) {
+          .tape-strip {
+             padding: 0.8rem 0;
+          }
+          .tape-label {
+             font-size: 0.9rem;
+             padding: 0 1rem 0 1.5rem;
+          }
+          .tape-text {
+             font-size: 0.9rem;
+             margin: 0 0.5rem;
+          }
         }
       `}</style>
     </div>

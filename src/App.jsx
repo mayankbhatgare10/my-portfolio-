@@ -87,9 +87,7 @@ const AppContent = () => {
                     <Profile />
                   </AnimatedComponent>
 
-                  <AnimatedComponent>
-                    <About />
-                  </AnimatedComponent>
+                  <About />
                   <AnimatedComponent>
                     <Achievements />
                   </AnimatedComponent>

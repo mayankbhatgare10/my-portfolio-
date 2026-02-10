@@ -8,14 +8,15 @@
 }
 
 /* Prevent horizontal scroll at root level */
+/* Using overflow-x: clip (NOT hidden) — clip does NOT break position:sticky */
 html {
-    overflow-x: hidden;
+    overflow-x: clip;
     width: 100%;
     max-width: 100%;
 }
 
 body {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     width: 100%;
     max-width: 100%;
     margin: 0;
@@ -23,7 +24,7 @@ body {
 }
 
 #root {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     width: 100%;
     max-width: 100%;
 }
@@ -31,8 +32,7 @@ body {
 /* Ensure all major containers respect boundaries */
 section {
     max-width: 100%;
-    overflow-x: clip;
-    /* Modern alternative to hidden that doesn't affect positioning */
+    /* NOTE: Do NOT set overflow-x here — it breaks position:sticky */
 }
 
 /* Specific fix for elements using 100vw */
@@ -54,8 +54,8 @@ section {
 }
 
 /* Specific fixes for known problem areas */
+/* NOTE: .about-section intentionally excluded — overflow breaks sticky sidebar */
 .products-section,
-.about-section,
 .achievements-scroll-wrapper,
 .footer-section {
     max-width: 100%;

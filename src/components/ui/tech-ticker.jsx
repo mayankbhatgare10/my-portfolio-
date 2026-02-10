@@ -120,6 +120,32 @@ const TechTicker = () => {
           0% { transform: translateX(0); }
           100% { transform: translateX(-33.33%); }
         }
+
+        @media screen and (max-width: 768px) {
+          .tech-ticker-container {
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+          }
+          .tech-label {
+             font-size: 1rem;
+             padding: 0 1rem 0 1rem;
+             background: ${isDarkMode ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)'}; /* Simpler background on mobile */
+          }
+          .tech-item {
+             padding: 0 1rem;
+             gap: 0.5rem;
+          }
+          .tech-logo {
+             width: 24px;
+             height: 24px;
+          }
+          .tech-name {
+             font-size: 1rem;
+          }
+          .dot {
+             margin-left: 1rem;
+          }
+        }
       `}</style>
     </div>
   );

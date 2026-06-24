@@ -266,52 +266,95 @@ const About = () => {
             style={{ y: expCardY, opacity: expCardOpacity }}
           >
             <h2 className="about-heading">Experience</h2>
-            <div className="experience-card">
-              <div className="experience-header">
-                <h3 className="experience-role">UI/UX Team Lead</h3>
-                <p className="experience-company">Infobytes Technosys</p>
-                <p className="experience-duration">
-                  Aug 2024 – Present | Pune, India
-                </p>
+            <div className="experience-timeline">
+              {/* UI/UX Team Lead */}
+              <div className="experience-card">
+                <div className="experience-header">
+                  <h3 className="experience-role">UI/UX Team Lead</h3>
+                  <p className="experience-company">Infobytes Technosys Pvt Ltd</p>
+                  <p className="experience-duration">
+                    Apr 2025 – Present | Pune, India
+                  </p>
+                </div>
+                <ul className="experience-highlights">
+                  <li>
+                    Leading UI/UX across client and in-house products, translating
+                    business requirements into structured, scalable, and
+                    production-ready experiences.
+                  </li>
+                  <li>
+                    Delivered end-to-end product experiences for multiple digital
+                    products, balancing user needs, business goals, and technical
+                    feasibility.
+                  </li>
+                  <li>
+                    Spearheaded the complete redesign of the PayTrakz mobile app,
+                    improving navigation architecture, visual hierarchy, and
+                    interaction consistency.
+                  </li>
+                  <li>
+                    Systematized reusable components, design patterns, and
+                    interaction guidelines to maintain consistency across products
+                    and reduce iteration cycles.
+                  </li>
+                  <li>
+                    Shipped a role-based Dairy Management platform with distinct
+                    Customer and Admin ecosystems, defining workflows, dashboards,
+                    and permission systems.
+                  </li>
+                  <li>
+                    Drove stakeholder alignment through design walkthroughs,
+                    collaborative reviews, and structured handoffs to accelerate
+                    approvals and implementation clarity.
+                  </li>
+                  <li>
+                    Led design QA, cross-device validation, and mentored junior
+                    designers to maintain implementation quality across web and
+                    mobile.
+                  </li>
+                </ul>
               </div>
-              <ul className="experience-highlights">
-                <li>
-                  Leading UI/UX across client and in-house products, translating
-                  business requirements into structured, scalable, and
-                  production-ready experiences.
-                </li>
-                <li>
-                  Delivered UI/UX for multiple digital products, balancing user
-                  needs, business goals, and technical constraints.
-                </li>
-                <li>
-                  Spearheaded a full redesign of the in-house mobile app,
-                  refining navigation architecture, visual hierarchy, and
-                  interaction clarity.
-                </li>
-                <li>
-                  Designed web platforms end-to-end, from user flows and
-                  wireframes to high-fidelity interfaces and developer-ready
-                  specifications.
-                </li>
-                <li>
-                  Systematized reusable components and design patterns to ensure
-                  cross-product consistency and reduce iteration cycles.
-                </li>
-                <li>
-                  Shipped a role-based dairy platform with distinct Customer and
-                  Admin ecosystems, defining workflows, dashboards, and
-                  permissions.
-                </li>
-                <li>
-                  Drove stakeholder alignment through structured design reviews,
-                  accelerating approvals and handoff clarity.
-                </li>
-                <li>
-                  Led design QA and cross-device validation to maintain
-                  implementation accuracy and production quality.
-                </li>
-              </ul>
+
+              {/* UI/UX Intern */}
+              <div className="experience-card">
+                <div className="experience-header">
+                  <h3 className="experience-role">UI/UX Intern</h3>
+                  <p className="experience-company">Infobytes Technosys Pvt Ltd</p>
+                  <p className="experience-duration">
+                    Aug 2024 – Apr 2025 | Pune, India
+                  </p>
+                </div>
+                <ul className="experience-highlights">
+                  <li>
+                    Supported UI/UX delivery for in-house and client products,
+                    contributing to structured user experiences from concept to
+                    execution.
+                  </li>
+                  <li>
+                    Designed web platforms end-to-end, creating user flows,
+                    wireframes, high-fidelity interfaces, and developer-ready
+                    specifications.
+                  </li>
+                  <li>
+                    Designed and launched the official company landing page,
+                    aligning responsive layouts with brand storytelling and
+                    performance-focused design.
+                  </li>
+                  <li>
+                    Built reusable UI patterns and scalable components across
+                    dashboards, forms, tables, filters, and state screens.
+                  </li>
+                  <li>
+                    Collaborated closely with developers and stakeholders to
+                    transform business requirements into intuitive workflows and
+                    seamless product journeys.
+                  </li>
+                  <li>
+                    Conducted design QA and cross-device testing to ensure
+                    responsiveness, consistency, and pixel-perfect delivery.
+                  </li>
+                </ul>
+              </div>
             </div>
           </motion.div>
         </div>
